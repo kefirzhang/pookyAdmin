@@ -1,0 +1,3 @@
+静态资源再public/_static目录下面软链
+ln -s /Users/kefirzhang/Develop/adminTpl/metronic_v6.0.4/theme/classic/demo1 /Users/kefirzhang/Develop/pookyAdmin/site/public/_static/demo1
+ln -s /Users/kefirzhang/Develop/adminTpl/metronic_v6.0.4/theme/classic/assets /Users/kefirzhang/Develop/pookyAdmin/site/public/_static/assets

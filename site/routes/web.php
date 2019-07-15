@@ -15,11 +15,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'IndexController@index')->name('index');
-    Route::get('diy', function () {
-        return view('welcome');
-    });
-
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('menu', 'MenuController');
 });
 
 
