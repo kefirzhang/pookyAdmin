@@ -20,7 +20,7 @@ class CreateMenuTable extends Migration
             $table->string('name','128');//名称
             $table->string('action','255');//地址
             $table->string('target','64');//目标窗口
-            $table->dateTime('created_at'); //创建时间
+            $table->timestamps();
 
         });
     }

@@ -18,7 +18,7 @@ class CreateOptionsTable extends Migration
             $table->string('name','255'); //配置项
             $table->longText('value'); //配置内容
             $table->string('autoload','20'); //是否自动加载
-            $table->dateTime('created_at'); //创建时间
+            $table->timestamps();
             $table->index('name'); //索引
         });
     }
