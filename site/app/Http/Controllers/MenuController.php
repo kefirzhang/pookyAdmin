@@ -47,7 +47,7 @@ class MenuController extends Controller
 
     public function create(Request $request)
     {
-        $tRecords = Menu::initOneLevelShow(Menu::all());
+        $tRecords = Menu::initOneLevelShow();
         return view('module.menu.create', ['tRecords' => $tRecords]);
     }
 
@@ -96,7 +96,7 @@ class MenuController extends Controller
     public function edit($id)
     {
         $record = Menu::find($id);
-        $tRecords = Menu::initOneLevelShow(Menu::all());
+        $tRecords = Menu::initOneLevelShow();
         return view('module.menu.edit', ['record' => $record,'tRecords'=>$tRecords]);
     }
 

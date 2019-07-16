@@ -8,16 +8,11 @@ class Menu extends Model
 {
     protected $table = 'menu';
 
-    public static function tree()
+    public static function initOneLevelShow($records = [], $p_id = 0,$level = 0)
     {
-        $records = self::all();
-        //格式化成树状结构
-        return $records = self::initOneLevelShow($records);
-
-    }
-
-    public static function initOneLevelShow($records, $p_id = 0,$level = 0)
-    {
+        if(empty($records)) {
+            $records = self::all();
+        }
         $backData = [];
         foreach ($records as $record) {
             if ($record['p_id'] == $p_id) {
@@ -30,8 +25,11 @@ class Menu extends Model
         return $backData;
     }
 
-    public static function initTree($records, $p_id = 0, $level = 0)
+    public static function initTree($records = [], $p_id = 0, $level = 0)
     {
+        if(empty($records)) {
+            $records = self::all();
+        }
         $backData = [];
         foreach ($records as $record) {
             if ($record['p_id'] == $p_id) {
