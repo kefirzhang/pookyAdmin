@@ -70,6 +70,7 @@
                                 <th>ID</th>
                                 <th>父类</th>
                                 <th>名称</th>
+                                <th>图标</th>
                                 <th>地址</th>
                                 <th>目标</th>
                                 <th>操作</th>
@@ -81,6 +82,7 @@
                                     <th scope="row">{{ $record->id }}</th>
                                     <td>{{ $record->p_id }}</td>
                                     <td>{{ $record->name }}</td>
+                                    <td><i class="fa {{ $record->icon }}"></i></td>
                                     <td>{{ $record->action }}</td>
                                     <td>{{ $record->target }}</td>
                                     <td>

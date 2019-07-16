@@ -16,18 +16,19 @@ class MenuController extends Controller
     {
 
     }
+
     public function store(Request $request)
     {
         $this->validate($request, [
-            'p_id'      => 'required',
-            'name'      => 'required|max:255',
-            'action'    => 'required',
-            'target'    => 'required',
+            'p_id' => 'required',
+            'name' => 'required|max:255',
+            'target' => 'required',
         ]);
         $menu = new Menu;
         $menu->p_id = $request->p_id;
         $menu->name = $request->name;
-        $menu->action = $request->action;
+        $menu->icon = $request->icon??'';
+        $menu->action = $request->action??'';
         $menu->target = $request->target;
         if ($menu->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
@@ -39,29 +40,45 @@ class MenuController extends Controller
     public function index()
     {
         $records = Menu::all();
-        return view('module.menu.index',['records'=>$records]);
+        return view('module.menu.index', ['records' => $records]);
     }
 
     public function create(Request $request)
     {
-        return Menu::tree();
-        return view('module.menu.create');
+        $tRecords = Menu::initOneLevelShow(Menu::all());
+        return view('module.menu.create', ['tRecords' => $tRecords]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'p_id' => 'required',
+            'name' => 'required|max:255',
+            'target' => 'required',
+        ]);
+        $menu = Menu::find($id);
+        $menu->p_id = $request->p_id;
+        $menu->name = $request->name;
+        $menu->icon = $request->icon??'';
+        $menu->action = $request->action??'';
+        $menu->target = $request->target;
+        if ($menu->save()) {
+            return redirect()->back()->withInput()->withErrors('更新成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('更新失败！');
+        }
     }
 
     public function show($id)
     {
         $category = Category::find($id);
-        if($category->parent_id != 0){
+        if ($category->parent_id != 0) {
             $parent_info = Category::find($category->parent_id);
             $category->parent_name = $parent_info->name;
         } else {
             $category->parent_name = '顶级分类';
         }
-        return view('admin/category/info',['category'=>$category]);
+        return view('admin/category/info', ['category' => $category]);
 
         return view('module.menu.show');
     }
@@ -75,7 +92,8 @@ class MenuController extends Controller
     public function edit($id)
     {
         $record = Menu::find($id);
-        return view('module.menu.create',['record'=>$record]);
+        $tRecords = Menu::initOneLevelShow(Menu::all());
+        return view('module.menu.edit', ['record' => $record,'tRecords'=>$tRecords]);
     }
 
 }

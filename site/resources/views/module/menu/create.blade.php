@@ -71,25 +71,29 @@
                         <label for="example-text-input" class="col-2 col-form-label">父类</label>
                         <div class="col-10">
                             <select class="form-control" name="p_id">
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option value="0">顶级分类</option>
+                                @foreach($tRecords as $tRecord)
+                                    <option value="{{$tRecord->id}}">{{$tRecord->level_pre}}{{$tRecord->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">名称</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="{{ $record->name ??'' }}" name="name">
+                            <input class="form-control" type="text" value="" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">图标</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="icon">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">地址</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="{{ $record->action ??''}}" name="action">
+                            <input class="form-control" type="text" value="" name="action">
                         </div>
                     </div>
                     <div class="form-group row">
