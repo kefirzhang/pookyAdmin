@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use mysql_xdevapi\Exception;
 
 class RegisterController extends Controller
 {
@@ -38,16 +39,20 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+
+
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
+
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -58,15 +63,27 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
+        //return redirect()->back()->withInput()->withErrors('注册未开启，请联系管理员开启.env配置文件注册选项');
+        if (!env('OPEN_REGISTER', '1')) { //未开放注册
+            die('注册未开启，请联系管理员开启.env配置文件注册选项');
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    public function showRegistrationForm()
+    {
+        if (!env('OPEN_REGISTER', '1')) { //未开放注册
+            return view('error.default',['message'=>'注册未开启，请联系管理员开启[配置文件:`OPEN_REGISTER`选项]']);
+        } else {
+            return view('auth.register');
+        }
     }
 }
