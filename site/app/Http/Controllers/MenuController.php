@@ -44,6 +44,7 @@ class MenuController extends Controller
 
     public function create(Request $request)
     {
+        return Menu::tree();
         return view('module.menu.create');
     }
 
