@@ -23,6 +23,7 @@ class MenuController extends Controller
             'p_id' => 'required',
             'name' => 'required|max:255',
             'target' => 'required',
+            'order' => 'required',
         ]);
         $menu = new Menu;
         $menu->p_id = $request->p_id;
@@ -30,6 +31,7 @@ class MenuController extends Controller
         $menu->icon = $request->icon??'';
         $menu->action = $request->action??'';
         $menu->target = $request->target;
+        $menu->order = $request->order??9999;
         if ($menu->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
         } else {
@@ -39,7 +41,7 @@ class MenuController extends Controller
 
     public function index()
     {
-        $records = Menu::all();
+        $records = Menu::all()->sortBy('order');
         return view('module.menu.index', ['records' => $records]);
     }
 
@@ -55,6 +57,7 @@ class MenuController extends Controller
             'p_id' => 'required',
             'name' => 'required|max:255',
             'target' => 'required',
+            'order' => 'required',
         ]);
         $menu = Menu::find($id);
         $menu->p_id = $request->p_id;
@@ -62,6 +65,7 @@ class MenuController extends Controller
         $menu->icon = $request->icon??'';
         $menu->action = $request->action??'';
         $menu->target = $request->target;
+        $menu->order = $request->order??9999;
         if ($menu->save()) {
             return redirect()->back()->withInput()->withErrors('更新成功！');
         } else {

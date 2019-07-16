@@ -107,6 +107,12 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">排序</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="9999" name="order">
+                        </div>
+                    </div>
                 </div>
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">

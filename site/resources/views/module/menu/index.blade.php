@@ -73,6 +73,7 @@
                                 <th>图标</th>
                                 <th>地址</th>
                                 <th>目标</th>
+                                <th>排序</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -85,6 +86,7 @@
                                     <td><i class="fa {{ $record->icon }}"></i></td>
                                     <td>{{ $record->action }}</td>
                                     <td>{{ $record->target }}</td>
+                                    <td>{{ $record->order }}</td>
                                     <td>
                                         <a title="Edit details" href="{{ route('menu.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
