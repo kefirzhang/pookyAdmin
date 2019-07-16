@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Menu;
 
 class MenuController extends Controller
 {
@@ -15,45 +16,65 @@ class MenuController extends Controller
     {
 
     }
-
-
-    public function store()
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'p_id'      => 'required',
+            'name'      => 'required|max:255',
+            'action'    => 'required',
+            'target'    => 'required',
+        ]);
+        $menu = new Menu;
+        $menu->p_id = $request->p_id;
+        $menu->name = $request->name;
+        $menu->action = $request->action;
+        $menu->target = $request->target;
+        if ($menu->save()) {
+            return redirect()->back()->withInput()->withErrors('保存成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('保存失败！');
+        }
     }
 
     public function index()
     {
-        return view('module.menu.index');
+        $records = Menu::all();
+        return view('module.menu.index',['records'=>$records]);
     }
 
-    public function create()
+    public function create(Request $request)
+    {
+        return view('module.menu.create');
+    }
+
+    public function update(Request $request,$id)
     {
     }
 
-    public function update()
+    public function show($id)
     {
+        $category = Category::find($id);
+        if($category->parent_id != 0){
+            $parent_info = Category::find($category->parent_id);
+            $category->parent_name = $parent_info->name;
+        } else {
+            $category->parent_name = '顶级分类';
+        }
+        return view('admin/category/info',['category'=>$category]);
+
+        return view('module.menu.show');
     }
 
-    public function show()
+    public function destroy($id)
     {
+        Menu::find($id)->delete();
+        return redirect()->back()->withInput()->withErrors('删除成功！');
     }
 
-    public function destroy()
+    public function edit($id)
     {
+        $record = Menu::find($id);
+        return view('module.menu.create',['record'=>$record]);
     }
-
-    public function edit()
-    {
-    }
-    /**
-     *            POST      | menu                   | menu.store       | App\Http\Controllers\MenuController@store                              | web,auth     |
-     * |        | GET|HEAD  | menu                   | menu.index       | App\Http\Controllers\MenuController@index                              | web,auth     |
-     * |        | GET|HEAD  | menu/create            | menu.create      | App\Http\Controllers\MenuController@create                             | web,auth     |
-     * |        | PUT|PATCH | menu/{menu}            | menu.update      | App\Http\Controllers\MenuController@update                             | web,auth     |
-     * |        | GET|HEAD  | menu/{menu}            | menu.show        | App\Http\Controllers\MenuController@show                               | web,auth     |
-     * |        | DELETE    | menu/{menu}            | menu.destroy     | App\Http\Controllers\MenuController@destroy                            | web,auth     |
-     * |        | GET|HEAD  | menu/{menu}/edit       | menu.edit        | App\Http\Controllers\MenuController@edit                               | web,auth
-     * }
-     */
 
 }
