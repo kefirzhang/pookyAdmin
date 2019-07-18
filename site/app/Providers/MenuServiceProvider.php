@@ -25,6 +25,10 @@ class MenuServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('menuTree', Menu::initTree());
+        try{
+            View::share('menuTree', Menu::initTree());
+        }catch(\Exception $e) {
+            // 什么都不做 这边第一次初始化的时候可能 回报错 所以忽略掉
+        }
     }
 }
