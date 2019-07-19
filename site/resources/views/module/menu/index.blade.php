@@ -13,11 +13,9 @@
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="" class="kt-subheader__breadcrumbs-link">
-                        General </a>
+                    <a href="" class="kt-subheader__breadcrumbs-link">列表 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="" class="kt-subheader__breadcrumbs-link">
-                        菜单列表 </a>
+                    <a href="" class="kt-subheader__breadcrumbs-link">菜单列表 </a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
