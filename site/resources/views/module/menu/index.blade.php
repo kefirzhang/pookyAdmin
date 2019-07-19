@@ -24,7 +24,6 @@
                 <div class="kt-subheader__wrapper">
                     <a href="{{ route('menu.create') }}" class="btn kt-subheader__btn-primary">
                         新增菜单 &nbsp;
-
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>

@@ -23,9 +23,8 @@
             </div>
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
-                    <a href="#" class="btn kt-subheader__btn-primary">
-                        Actions &nbsp;
-
+                    <a href="{{ route('option.create') }}" class="btn kt-subheader__btn-primary">
+                        新增
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
