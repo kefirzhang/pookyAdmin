@@ -16,6 +16,8 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'IndexController@index')->name('index');
     Route::resource('menu', 'MenuController');
+    Route::resource('book', 'BookController');
+    Route::resource('option', 'OptionController');
 });
 
 
