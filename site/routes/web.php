@@ -18,6 +18,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('menu', 'MenuController');
     Route::resource('book', 'BookController');
     Route::resource('option', 'OptionController');
+    Route::resource('spider', 'SpiderController');
+    Route::resource('chapter', 'ChapterController');
 });
 
 
