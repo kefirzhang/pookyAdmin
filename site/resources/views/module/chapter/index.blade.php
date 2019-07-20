@@ -65,9 +65,9 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>名称</th>
-                                <th>值</th>
-                                <th>自动加载</th>
+                                @foreach ($metaData as $meta)
+                                <th>{{$meta['show_name']}}</th>
+                                @endforeach
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -75,9 +75,9 @@
                             @foreach ($records as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
-                                    <td>{{ $record->name }}</td>
-                                    <td>{{ $record->value }}</td>
-                                    <td>{{ $record->autoload }}</td>
+                                    @foreach ($metaData as $meta)
+                                        <td>{{ $record->{$meta['name']} }}</td>
+                                    @endforeach
                                     <td>
                                         <a title="Edit details" href="{{ route('chapter.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>

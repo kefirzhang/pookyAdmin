@@ -63,28 +63,14 @@
                         </div>
                     </div>
                     @endif
-
+                    @foreach ($metaData as $meta)
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">名称</label>
+                        <label for="example-text-input" class="col-2 col-form-label">{{ $meta['show_name'] }}</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="name">
+                            <input class="form-control" type="{{ $meta['type'] }}" value="" name="{{ $meta['name'] }}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">值</label>
-                        <div class="col-10">
-                            <textarea name="value" class="form-control" id="exampleTextarea" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">加载机制</label>
-                        <div class="col-10">
-                            <select class="form-control" id="exampleSelectd" name="autoload">
-                                <chapter value="yes">YES</chapter>
-                                <chapter value="no">NO</chapter>
-                            </select>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">

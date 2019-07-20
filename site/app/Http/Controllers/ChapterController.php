@@ -2,14 +2,16 @@
 /**
  * @desc 示例流程 Controller Model view curd
  */
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 use App\Model\Chapter;
 
 class ChapterController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -17,20 +19,16 @@ class ChapterController extends Controller
      */
     public function __construct()
     {
-
+        View::share('metaData', Chapter::getMetaData());
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name'      => 'required|max:255',
-            'value'     => 'required',
-            'autoload'  => 'required',
-        ]);
+        $this->validate($request, Chapter::getValidateRule());
         $chapter = new Chapter;
-        $chapter->name       = $request->name;
-        $chapter->value      = $request->value;
-        $chapter->autoload   = $request->autoload;
+        foreach (Chapter::getMetaData() as $meta) {
+            $chapter->{$meta['name']} = $request->{$meta['name']};
+        }
         if ($chapter->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
         } else {
@@ -51,15 +49,11 @@ class ChapterController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name'      => 'required|max:255',
-            'value'     => 'required',
-            'autoload'  => 'required',
-        ]);
+        $this->validate($request, Chapter::getValidateRule());
         $chapter = Chapter::find($id);
-        $chapter->name = $request->name;
-        $chapter->value = $request->value;
-        $chapter->autoload = $request->autoload;
+        foreach (Chapter::getMetaData() as $meta) {
+            $chapter->{$meta['name']} = $request->{$meta['name']};
+        }
 
         if ($chapter->save()) {
             return redirect()->back()->withInput()->withErrors('更新成功！');
@@ -73,7 +67,7 @@ class ChapterController extends Controller
 
         $record = Chapter::find($id);
 
-        return view('module.chapter.show',['record'=>$record]);
+        return view('module.chapter.show', ['record' => $record]);
     }
 
     public function destroy($id)
