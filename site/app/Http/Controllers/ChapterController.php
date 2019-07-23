@@ -38,7 +38,7 @@ class ChapterController extends Controller
 
     public function index()
     {
-        $records = Chapter::all();
+        $records = Chapter::all(['id','b_id','title','bs_id','ref_id','order']);
         return view('module.chapter.index', ['records' => $records]);
     }
 

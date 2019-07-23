@@ -66,7 +66,9 @@
                             <tr>
                                 <th>ID</th>
                                 @foreach ($metaData as $meta)
+                                @if($meta['list_show'])
                                 <th>{{$meta['show_name']}}</th>
+                                @endif
                                 @endforeach
                                 <th>操作</th>
                             </tr>
@@ -75,10 +77,15 @@
                             @foreach ($records as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
-                                    @foreach ($metaData as $meta)
+                                        @foreach ($metaData as $meta)
+                                        @if($meta['list_show'])
                                         <td>{{ $record->{$meta['name']} }}</td>
-                                    @endforeach
+                                        @endif
+                                        @endforeach
                                     <td>
+                                        <a title="Edit details" href="{{ route('chapter.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-file-text"></i>
+                                        </a>
                                         <a title="Edit details" href="{{ route('chapter.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>

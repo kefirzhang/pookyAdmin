@@ -64,26 +64,18 @@
                             </div>
                         </div>
                     @endif
-
+                    @foreach ($metaData as $meta)
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">名称</label>
+                        <label for="example-text-input" class="col-2 col-form-label">{{ $meta['show_name'] }}</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="{{ $record->name}}" name="name" readonly>
+                            <input class="form-control" type="{{ $meta['type'] }}" value="{{ $record->{$meta['name']} }}" name="{{ $meta['name'] }}">
                         </div>
                     </div>
+                    @endforeach
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">值</label>
+                        <label for="example-text-input" class="col-2 col-form-label">{{ $meta['show_name'] }}</label>
                         <div class="col-10">
-                            <textarea name="value" class="form-control" id="exampleTextarea" readonly rows="3">{{ $record->value}}</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">加载机制</label>
-                        <div class="col-10">
-                            <select class="form-control" id="exampleSelectd" name="target" readonly>
-                                <chapter @if($record->autoload == 'yes') selected @endif value="yes">YES</chapter>
-                                <chapter @if($record->autoload == 'no')  selected @endif value="no">NO</chapter>
-                            </select>
+                            {!!$record->content!!}
                         </div>
                     </div>
                 </div>
