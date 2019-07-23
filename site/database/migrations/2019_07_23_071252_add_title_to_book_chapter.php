@@ -15,7 +15,7 @@ class AddTitleToBookChapter extends Migration
     {
         Schema::table('book_chapter', function (Blueprint $table) {
             //
-            $table->string('title',255);
+            $table->string('title',255)->after('bs_id');
         });
     }
 
