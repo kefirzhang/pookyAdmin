@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('option', 'OptionController');
     Route::resource('spider', 'SpiderController');
     Route::resource('chapter', 'ChapterController');
+    Route::get('bookreset/{id}','BookController@reset')->name('book.reset');
 });
 
 

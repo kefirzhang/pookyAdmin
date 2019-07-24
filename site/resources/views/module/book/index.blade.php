@@ -76,7 +76,7 @@
                                 <th>最新章节</th>
                                 <th>采集规则id</th>
                                 <th>是否完结</th>
-
+                                <th>采集操作</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -94,21 +94,27 @@
                                     <td>{{ $record->bs_id }}</td>
                                     <td>{{ $record->finished }}</td>
                                     <td>
+
                                         <a title="章节列表" href="{{ route('chapter.index') }}?b_id={{ $record->id }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-list"></i>
                                         </a>
                                         <a title="采集规则" href="{{ route('spider.index') }}?b_id={{ $record->id }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-dropbox"></i>
                                         </a>
+                                        <a title="清空章节" href="javascript:if(confirm('确认要清空图书章节吗？'))location='{{ route('book.reset',$record->id) }}'"  class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la-pied-piper-alt"></i>
+                                        </a>
+                                    </td>
+                                    <td>
 
-                                        <a title="Edit details" href="{{ route('book.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                        <a title="编辑" href="{{ route('book.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>
                                         <form action="{{ route('book.destroy',$record->id) }}" method="POST" style="display:inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-clean btn-icon btn-icon-md">
-                                                <i class="la la-trash"></i>
+                                                <i class="la 删除"></i>
                                             </button>
                                         </form>
                                     </td>

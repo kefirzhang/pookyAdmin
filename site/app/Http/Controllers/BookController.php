@@ -4,6 +4,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\Model\Chapter;
 use Illuminate\Http\Request;
 use App\Model\Book;
 
@@ -98,4 +99,17 @@ class BookController extends Controller
         return view('module.book.edit', ['record' => $record]);
     }
 
+    function reset($id)
+    {
+        Chapter::where('b_id',$id)->delete();
+
+        $book = Book::find($id);
+        $book->last_chapter = '';
+        $book->bs_id        = '0';
+        if ($book->save()) {
+            return redirect()->back()->withInput()->withErrors('成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('失败！');
+        }
+    }
 }
