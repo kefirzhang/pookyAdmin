@@ -66,7 +66,9 @@
                             <tr>
                                 <th>ID</th>
                                 @foreach ($metaData as $meta)
+                                @if($meta['list_show'])
                                 <th>{{$meta['show_name']}}</th>
+                                @endif
                                 @endforeach
                                 <th>操作</th>
                             </tr>
@@ -76,7 +78,9 @@
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
                                     @foreach ($metaData as $meta)
+                                        @if($meta['list_show'])
                                         <td>{{ $record->{$meta['name']} }}</td>
+                                        @endif
                                     @endforeach
                                     <td>
                                         <a title="Edit details" href="{{ route('spider.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">

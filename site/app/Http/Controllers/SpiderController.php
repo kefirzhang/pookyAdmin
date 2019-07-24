@@ -12,15 +12,15 @@ use App\Model\Spider;
 class SpiderController extends Controller
 {
     public $metaData = [
-        'b_id' => ['name' => 'b_id', 'show_name' => '图书ID', 'type' => 'text'],
-        'site_url' => ['name' => 'site_url', 'show_name' => '站点地址', 'type' => 'text'],
-        'info_url' => ['name' => 'info_url', 'show_name' => '详情地址', 'type' => 'text'],
-        'list_url' => ['name' => 'list_url', 'show_name' => '列表地址', 'type' => 'text'],
-        'detail_url' => ['name' => 'detail_url', 'show_name' => '详情地址', 'type' => 'text'],
-        'info_rule' => ['name' => 'info_rule', 'show_name' => '详情规则', 'type' => 'text'],
-        'list_rule' => ['name' => 'list_rule', 'show_name' => '列表规则', 'type' => 'text'],
-        'detail_rule' => ['name' => 'detail_rule', 'show_name' => '详情规则', 'type' => 'text'],
-        'order' => ['name' => 'order', 'show_name' => '排序', 'type' => 'text'],
+        'b_id' => ['name' => 'b_id', 'show_name' => '图书ID', 'type' => 'text', 'list_show' => true],
+        'site_url' => ['name' => 'site_url', 'show_name' => '站点地址', 'type' => 'text', 'list_show' => true],
+        'info_url' => ['name' => 'info_url', 'show_name' => '详情地址', 'type' => 'text', 'list_show' => false],
+        'list_url' => ['name' => 'list_url', 'show_name' => '列表地址', 'type' => 'text', 'list_show' => true],
+        'detail_url' => ['name' => 'detail_url', 'show_name' => '详情地址', 'type' => 'text', 'list_show' => false],
+        'info_rule' => ['name' => 'info_rule', 'show_name' => '详情规则', 'type' => 'text', 'list_show' => false],
+        'list_rule' => ['name' => 'list_rule', 'show_name' => '列表规则', 'type' => 'text', 'list_show' => true],
+        'detail_rule' => ['name' => 'detail_rule', 'show_name' => '详情规则', 'type' => 'text', 'list_show' => true],
+        'order' => ['name' => 'order', 'show_name' => '排序', 'type' => 'text', 'list_show' => true],
 
     ];
 
