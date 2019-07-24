@@ -83,10 +83,10 @@
                                         @endif
                                         @endforeach
                                     <td>
-                                        <a title="Edit details" href="{{ route('chapter.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                        <a title="章节列表" href="{{ route('chapter.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-file-text"></i>
                                         </a>
-                                        <a title="Edit details" href="{{ route('chapter.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                        <a title="采集规则" href="{{ route('chapter.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>
                                         <form action="{{ route('chapter.destroy',$record->id) }}" method="POST" style="display:inline">
@@ -101,6 +101,18 @@
                             @endforeach
                             </tbody>
                         </table>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-7">
+
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <div>
+                                {{ $records->appends(['b_id' => $b_id ])->links() }}
+                            </div>
+                        </div>
                     </div>
                 </div>
 

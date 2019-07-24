@@ -8,6 +8,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Model\Chapter;
+use Illuminate\Support\Facades\DB;
 
 class ChapterController extends Controller
 {
@@ -36,10 +37,19 @@ class ChapterController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $records = Chapter::all(['id','b_id','title','bs_id','ref_id','order']);
-        return view('module.chapter.index', ['records' => $records]);
+        //Category::where('parent_id',$parent_id)->orderBy('id','desc')->paginate(env('ADMIN_PAGE_SIZE'));
+        $b_id = $request->input('b_id',0);
+        if($b_id) {
+            $records = Chapter::where('b_id',$b_id)->orderBy('id','desc')->paginate(env('CHAPTER_PAGE_SIZE'));
+        } else {
+            $records = Chapter::orderBy('id','desc')->paginate(env('CHAPTER_PAGE_SIZE'));
+        }
+
+        //orderBy('id','desc')->paginate(env('ADMIN_PAGE_SIZE'))
+        //$records = Chapter::all(['id','b_id','title','bs_id','ref_id','order']);
+        return view('module.chapter.index', ['records' => $records,'b_id'=>$b_id]);
     }
 
     public function create(Request $request)

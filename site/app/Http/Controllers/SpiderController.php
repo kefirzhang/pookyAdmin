@@ -58,9 +58,15 @@ class SpiderController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $records = Spider::all();
+        $b_id = $request->input('b_id', 0);
+        if ($b_id) {
+            $records = Spider::where('b_id', $b_id)->paginate(200);
+        } else {
+            $records = Spider::all();
+        }
+        //$records = Spider::all();
         return view('module.spider.index', ['records' => $records]);
     }
 
