@@ -1614,7 +1614,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- end::Scrolltop -->
 
 <!-- begin::Sticky Toolbar -->
-<ul class="kt-sticky-toolbar" style="margin-top: 30px;">
+<ul class="kt-sticky-toolbar" style="display:none;margin-top: 30px;">
     <li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success" id="kt_demo_panel_toggle" data-toggle="kt-tooltip" title="Check out more demos" data-placement="right">
         <a href="#" class=""><i class="flaticon2-drop"></i></a>
     </li>

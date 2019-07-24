@@ -40,16 +40,16 @@ class ChapterController extends Controller
     public function index(Request $request)
     {
         //Category::where('parent_id',$parent_id)->orderBy('id','desc')->paginate(env('ADMIN_PAGE_SIZE'));
-        $b_id = $request->input('b_id',0);
-        if($b_id) {
-            $records = Chapter::where('b_id',$b_id)->orderBy('id','desc')->paginate(env('CHAPTER_PAGE_SIZE'));
+        $b_id = $request->input('b_id', 0);
+        if ($b_id) {
+            $records = Chapter::where('b_id', $b_id)->orderBy('id', 'desc')->paginate(env('CHAPTER_PAGE_SIZE'));
         } else {
-            $records = Chapter::orderBy('id','desc')->paginate(env('CHAPTER_PAGE_SIZE'));
+            $records = Chapter::orderBy('id', 'desc')->paginate(env('CHAPTER_PAGE_SIZE'));
         }
 
         //orderBy('id','desc')->paginate(env('ADMIN_PAGE_SIZE'))
         //$records = Chapter::all(['id','b_id','title','bs_id','ref_id','order']);
-        return view('module.chapter.index', ['records' => $records,'b_id'=>$b_id]);
+        return view('module.chapter.index', ['records' => $records, 'b_id' => $b_id]);
     }
 
     public function create(Request $request)
@@ -75,9 +75,13 @@ class ChapterController extends Controller
     public function show($id)
     {
 
+
         $record = Chapter::find($id);
 
-        return view('module.chapter.show', ['record' => $record]);
+        $pre = Chapter::where('id', '<', $id)->where('b_id', $record->b_id)->orderby('id', 'desc')->first();
+        $after = Chapter::where('id', '>', $id)->where('b_id', $record->b_id)->orderby('id', 'asc')->first();
+
+        return view('module.chapter.show', ['record' => $record, 'pre' => $pre, 'after' => $after]);
     }
 
     public function destroy($id)

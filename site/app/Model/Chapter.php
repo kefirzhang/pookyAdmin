@@ -10,12 +10,12 @@ class Chapter extends Model
     protected $table = "book_chapter";
 
     private static $metaData = [
-        'b_id' => ['name' => 'b_id', 'show_name' => '图书ID', 'type' => 'text','list_show'=>true],
-        'bs_id' => ['name' => 'bs_id', 'show_name' => '当前规则ID', 'type' => 'text','list_show'=>true],
-        'title' => ['name' => 'title', 'show_name' => '标题', 'type' => 'text','list_show'=>true],
-        'content' => ['name' => 'content', 'show_name' => '章节内容', 'type' => 'text','list_show'=>false],
-        'ref_id' => ['name' => 'ref_id', 'show_name' => '源id', 'type' => 'text','list_show'=>true],
-        'order' => ['name' => 'order', 'show_name' => '顺序', 'type' => 'text','list_show'=>true],
+        'b_id' => ['name' => 'b_id', 'show_name' => '图书ID', 'type' => 'text', 'list_show' => true],
+        'bs_id' => ['name' => 'bs_id', 'show_name' => '当前规则ID', 'type' => 'text', 'list_show' => false],
+        'title' => ['name' => 'title', 'show_name' => '标题', 'type' => 'text', 'list_show' => true],
+        'content' => ['name' => 'content', 'show_name' => '章节内容', 'type' => 'text', 'list_show' => false],
+        'ref_id' => ['name' => 'ref_id', 'show_name' => '源id', 'type' => 'text', 'list_show' => false],
+        'order' => ['name' => 'order', 'show_name' => '顺序', 'type' => 'text', 'list_show' => false],
     ];
     private static $validateRule = [
         'b_id' => 'required',
@@ -25,6 +25,7 @@ class Chapter extends Model
         'ref_id' => 'required',
         'order' => 'required',
     ];
+
     public static function getMetaData()
     {
         return self::$metaData;
