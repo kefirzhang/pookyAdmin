@@ -9,12 +9,12 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    Option-配置项管理 </h3>
+                    {{ $moduleConf['moduleTips'] }}</h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
                     <a href="{{ route('index') }}" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route('option.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
+                    <a href="{{ route($moduleConf['moduleRoutePre'].'.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="javascript:;" class="kt-subheader__breadcrumbs-link">编辑 </a>
 
@@ -40,7 +40,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Textual HTML5 Inputs
+                        {{ $moduleConf['moduleTips']  }}
                     </h3>
                 </div>
             </div>
@@ -51,41 +51,27 @@
                 @method('PUT')
                 <div class="kt-portlet__body">
                     @if (count($errors) > 0)
-                    <div class="form-group form-group-last">
-                        <div class="alert alert-secondary" role="alert">
-                            <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-                            <div class="alert-text">
+                        <div class="form-group form-group-last">
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
                                     @foreach ($errors->all() as $error)
                                         <div class="note note-danger">
                                             <p> {{ $error }} </p>
                                         </div>
                                     @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endif
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">名称</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="{{ $record->name}}" name="name">
+                    @foreach ($metaData as $meta)
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">{{ $meta['show_name'] }}</label>
+                            <div class="col-10">
+                                <input class="form-control" type="{{ $meta['type'] }}" value="{{ $record->{$meta['name']} }}" name="{{ $meta['name'] }}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">值</label>
-                        <div class="col-10">
-                            <textarea name="value" class="form-control" id="exampleTextarea" rows="3">{{ $record->value}}</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">加载机制</label>
-                        <div class="col-10">
-                            <select class="form-control" id="exampleSelectd" name="autoload">
-                                <option @if($record->autoload == 'yes') selected @endif value="yes">YES</option>
-                                <option @if($record->autoload == 'no')  selected @endif value="no">NO</option>
-                            </select>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">

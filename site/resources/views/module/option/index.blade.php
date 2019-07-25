@@ -8,12 +8,12 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    Option-配置项管理 </h3>
+                    {{ $moduleConf['moduleTips'] }}</h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
                     <a href="{{ route('index') }}" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route('option.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
+                    <a href="{{ route($moduleConf['moduleRoutePre'].'.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="javascript:;" class="kt-subheader__breadcrumbs-link">列表 </a>
 
@@ -65,9 +65,11 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>名称</th>
-                                <th>值</th>
-                                <th>自动加载</th>
+                                @foreach ($metaData as $meta)
+                                    @if($meta['list_show'])
+                                        <th>{{$meta['show_name']}}</th>
+                                    @endif
+                                @endforeach
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -75,14 +77,16 @@
                             @foreach ($records as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
-                                    <td>{{ $record->name }}</td>
-                                    <td>{{ $record->value }}</td>
-                                    <td>{{ $record->autoload }}</td>
+                                    @foreach ($metaData as $meta)
+                                        @if($meta['list_show'])
+                                            <td>{{ $record->{$meta['name']} }}</td>
+                                        @endif
+                                    @endforeach
                                     <td>
-                                        <a title="Edit details" href="{{ route('option.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                        <a title="编辑" href="{{ route($moduleConf['moduleRoutePre'].'.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>
-                                        <form action="{{ route('option.destroy',$record->id) }}" method="POST" style="display:inline">
+                                        <form action="{{ route($moduleConf['moduleRoutePre'].'.destroy',$record->id) }}" method="POST" style="display:inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-clean btn-icon btn-icon-md">
@@ -94,6 +98,18 @@
                             @endforeach
                             </tbody>
                         </table>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-7">
+
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <div>
+                                {{ $records->appends(['id' => $record->id ])->links() }}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
