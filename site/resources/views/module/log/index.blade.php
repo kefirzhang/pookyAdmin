@@ -65,12 +65,13 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>时间</th>
                                 @foreach ($metaData as $meta)
                                     @if($meta['list_show'])
                                         <th>{{$meta['show_name']}}</th>
                                     @endif
                                 @endforeach
-                                <th>时间</th>
+
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -78,12 +79,13 @@
                             @foreach ($records as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
+                                    <td>{{ $record->created_at }}</td>
                                     @foreach ($metaData as $meta)
                                         @if($meta['list_show'])
                                             <td>{{ $record->{$meta['name']} }}</td>
                                         @endif
                                     @endforeach
-                                    <td>{{ $record->created_at }}</td>
+
                                     <td>
                                         <a title="详情" href="{{ route($moduleConf['moduleRoutePre'].'.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-file-text"></i>

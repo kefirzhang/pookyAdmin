@@ -48,7 +48,7 @@ class LogController extends Controller
 
     public function index()
     {
-        $records = CModel::paginate(env('CHAPTER_PAGE_SIZE'));;
+        $records = CModel::orderBy('id', 'desc')->paginate(env('LIST_PAGE_SIZE'));;
         return view($this->viewDir . 'index', ['records' => $records]);
     }
 
