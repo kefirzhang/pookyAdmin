@@ -83,6 +83,9 @@
                                         @endif
                                     @endforeach
                                     <td>
+                                        <a title="详情" href="{{ route($moduleConf['moduleRoutePre'].'.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-file-text"></i>
+                                        </a>
                                         <a title="编辑" href="{{ route($moduleConf['moduleRoutePre'].'.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>
