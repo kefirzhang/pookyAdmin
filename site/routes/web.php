@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('spider', 'SpiderController');
     Route::resource('chapter', 'ChapterController');
     Route::get('bookreset/{id}','BookController@reset')->name('book.reset');
+    Route::resource('log', 'LogController');
 });
 
 
