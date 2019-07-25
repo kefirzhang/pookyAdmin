@@ -110,7 +110,7 @@
                         </div>
                         <div class="col-sm-12 col-md-5">
                             <div>
-                                {{ $records->appends(['id' => $record->id ])->links() }}
+                                {{ $records->links() }}
                             </div>
                         </div>
                     </div>
