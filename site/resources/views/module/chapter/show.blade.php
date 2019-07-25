@@ -30,6 +30,19 @@
             padding: 15px;
         }
 
+        @media (max-width: 768px) {
+            #chapter_content {
+                font-family: 方正启体简体, "Microsoft YaHei", 微软雅黑, 宋体;
+                font-size: 10pt;
+                letter-spacing: 0.2em;
+                line-height: 150%;
+                padding-top: 15px;
+                width: 100%;
+                margin: auto;
+                font-weight: bolder;
+            }
+        }
+
     </style>
 @endsection
 
