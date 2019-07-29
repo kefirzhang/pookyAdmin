@@ -58,8 +58,6 @@ class BookController extends Controller
     {
         $this->validate($request, [
             'name'      => 'required|max:255',
-            'value'     => 'required',
-            'autoload'  => 'required',
         ]);
         $book = Book::find($id);
         $book->name         = $request->name;
