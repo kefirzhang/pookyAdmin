@@ -114,7 +114,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-clean btn-icon btn-icon-md">
-                                                <i class="la 删除"></i>
+                                                <i class="la la-trash"></i>
                                             </button>
                                         </form>
                                     </td>
