@@ -17,7 +17,7 @@ class CreateCategoryTable extends Migration
             $table->bigIncrements('id'); // 主键id
             $table->integer('parent_id'); //父类
             $table->string('name'); // 类名
-            $table->string('alias_name'); // 别名
+            $table->string('alias_name')->nullable(); // 别名
             $table->text('description'); //描述
             $table->string('cover'); //封面
             $table->integer('order')->default("9999"); //排序 越大越靠后
