@@ -1,3 +1,15 @@
 静态资源再public/_static目录下面软链
 ln -s /Users/kefirzhang/Develop/adminTpl/metronic_v6.0.4/theme/classic/demo1 /Users/kefirzhang/Develop/pookyAdmin/site/public/_static/demo1
 ln -s /Users/kefirzhang/Develop/adminTpl/metronic_v6.0.4/theme/classic/assets /Users/kefirzhang/Develop/pookyAdmin/site/public/_static/assets
+
+
+
+文档：
+https://laravel.com/docs/6.x/migrations#column-modifiers
+
+php artisan make:migration create_users_table --create=users
+
+php artisan make:migration add_votes_to_users_table --table=users
+
+
+php artisan migrate
