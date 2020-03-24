@@ -66,11 +66,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>父类</th>
-                                <th>名称</th>
+                                <th>类名</th>
                                 <th>别名</th>
                                 <th>图标</th>
-                                <th>地址</th>
-                                <th>目标</th>
                                 <th>排序</th>
                                 <th>操作</th>
                             </tr>
@@ -79,17 +77,16 @@
                             @foreach ($categorys as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
-                                    <td>{{ $record->p_id }}</td>
+                                    <td>{{ $record->parent_id }}</td>
                                     <td>{{ $record->name }}</td>
-                                    <td><i class="fa {{ $record->icon }}"></i></td>
-                                    <td>{{ $record->action }}</td>
-                                    <td>{{ $record->target }}</td>
+                                    <td>{{ $record->alias_name }}</td>
+                                    <td>{{ $record->cover }}</td>
                                     <td>{{ $record->order }}</td>
                                     <td>
-                                        <a title="Edit details" href="{{ route('menu.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                        <a title="Edit details" href="{{ route('category.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>
-                                        <form action="{{ route('menu.destroy',$record->id) }}" method="POST" style="display:inline">
+                                        <form action="{{ route('category.destroy',$record->id) }}" method="POST" style="display:inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-clean btn-icon btn-icon-md">

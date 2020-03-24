@@ -9,12 +9,12 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    Empty Page </h3>
+                    新增分类 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route('menu.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
+                    <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="" class="kt-subheader__breadcrumbs-link">新增</a>
 
@@ -23,8 +23,8 @@
             </div>
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
-                    <a href="{{ route('menu.create') }}" class="btn kt-subheader__btn-primary">
-                        新增菜单 &nbsp;
+                    <a href="{{ route('category.create') }}" class="btn kt-subheader__btn-primary">
+                        新增分类 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
@@ -46,31 +46,31 @@
             </div>
 
             <!--begin::Form-->
-            <form method="POST" action="{{ route('menu.store') }}" class="kt-form kt-form--label-right">
+            <form method="POST" action="{{ route('category.store') }}" class="kt-form kt-form--label-right">
                 @csrf
                 <div class="kt-portlet__body">
                     @if (count($errors) > 0)
-                    <div class="form-group form-group-last">
-                        <div class="alert alert-secondary" role="alert">
-                            <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-                            <div class="alert-text">
+                        <div class="form-group form-group-last">
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
                                     @foreach ($errors->all() as $error)
                                         <div class="note note-danger">
                                             <p> {{ $error }} </p>
                                         </div>
                                     @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endif
 
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">父类</label>
                         <div class="col-10">
-                            <select class="form-control" name="p_id">
-                                <option value="0">顶级分类</option>
-                                @foreach($tRecords as $tRecord)
-                                    <option value="{{$tRecord->id}}">{{$tRecord->level_pre}}{{$tRecord->name}}</option>
+                            <select class="form-control" name="parent_id">
+                                <option value="0">--</option>
+                                @foreach ($categorys as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -82,31 +82,35 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">图标</label>
+                        <label for="example-text-input" class="col-2 col-form-label">别名</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="icon">
+                            <input class="form-control" type="text" value="" name="alias_name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">地址</label>
+                        <label for="example-text-input" class="col-2 col-form-label">描述</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="action">
+                            <input class="form-control" type="text" value="" name="description">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">目标</label>
+                        <label for="example-text-input" class="col-2 col-form-label">封面</label>
                         <div class="col-10">
-                            <select class="form-control" id="exampleSelectd" name="target">
-                                <option value="_self">相同的框架中(_self)</option>
-                                <option value="_blank">在新窗口中(_blank)</option>
-                                <option value="_parent">在父框架集中(_parent)</option>
-                                <option value="_top">在整个窗口中(_top)</option>
-                            </select>
+                            <input class="form-control" type="text" value="" name="cover">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">排序</label>
                         <div class="col-10">
+                            <input class="form-control" type="text" value="9999" name="order">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>
+                        <div class="col-5">
+                            <input class="form-control" type="text" value="9999" name="order">
+                        </div>
+                        <div class="col-5">
                             <input class="form-control" type="text" value="9999" name="order">
                         </div>
                     </div>

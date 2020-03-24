@@ -14,7 +14,7 @@
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route('menu.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
+                    <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="" class="kt-subheader__breadcrumbs-link">编辑</a>
 
@@ -23,8 +23,8 @@
             </div>
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
-                    <a href="{{ route('menu.create') }}" class="btn kt-subheader__btn-primary">
-                        新增菜单 &nbsp;
+                    <a href="{{ route('category.create') }}" class="btn kt-subheader__btn-primary">
+                        新增分类 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
@@ -46,7 +46,7 @@
             </div>
 
             <!--begin::Form-->
-            <form method="POST" action="{{ route('menu.update',$record->id) }}" class="kt-form kt-form--label-right">
+            <form method="POST" action="{{ route('category.update',$record->id) }}" class="kt-form kt-form--label-right">
                 @csrf
                 @method('PUT')
                 <div class="kt-portlet__body">
