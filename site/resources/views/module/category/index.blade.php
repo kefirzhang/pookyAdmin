@@ -52,7 +52,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Bordered Table
+                        分类列表
                     </h3>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($categorys as $record)
+                            @foreach ($records as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
                                     <td>{{ $record->parent_id }}</td>
@@ -83,6 +83,12 @@
                                     <td>{{ $record->cover }}</td>
                                     <td>{{ $record->order }}</td>
                                     <td>
+                                        <a title="Show sons" href="{{ route('category.index') }}?parent_id={{ $record->id }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-bars"></i>
+                                        </a>
+                                        <a title="Show details" href="{{ route('category.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-search"></i>
+                                        </a>
                                         <a title="Edit details" href="{{ route('category.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>

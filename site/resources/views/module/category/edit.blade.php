@@ -9,7 +9,7 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    Empty Page </h3>
+                    编辑分类 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
@@ -24,7 +24,7 @@
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
                     <a href="{{ route('category.create') }}" class="btn kt-subheader__btn-primary">
-                        新增分类 &nbsp;
+                        编辑分类 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
@@ -40,7 +40,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Textual HTML5 Inputs
+                        编辑分类
                     </h3>
                 </div>
             </div>
@@ -49,32 +49,32 @@
             <form method="POST" action="{{ route('category.update',$record->id) }}" class="kt-form kt-form--label-right">
                 @csrf
                 @method('PUT')
-                <div class="kt-portlet__body">
+                <div class="kt-portlet__body" id="main_form">
                     @if (count($errors) > 0)
-                    <div class="form-group form-group-last">
-                        <div class="alert alert-secondary" role="alert">
-                            <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-                            <div class="alert-text">
+                        <div class="form-group form-group-last">
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
                                     @foreach ($errors->all() as $error)
                                         <div class="note note-danger">
                                             <p> {{ $error }} </p>
                                         </div>
                                     @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endif
 
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">父类</label>
                         <div class="col-10">
-                            <select class="form-control" name="p_id">
-                                <option value="0">顶级分类</option>
-                                @foreach($tRecords as $tRecord)
-                                    @if ($record->p_id == $tRecord->id )
-                                    <option selected value="{{$tRecord->id}}">{{$tRecord->level_pre}}{{$tRecord->name}}</option>
+                            <select class="form-control" name="parent_id">
+                                <option value="0">--</option>
+                                @foreach ($topCategoryList as $category)
+                                    @if ($record->parent_id == $category->id )
+                                        <option selected value="{{$category->id}}">{{$category->name}}</option>
                                     @else
-                                    <option value="{{$tRecord->id}}">{{$tRecord->level_pre}}{{$tRecord->name}}</option>
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -83,30 +83,25 @@
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">名称</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="{{ $record->name}}" name="name">
+                            <input class="form-control" type="text" value="{{ $record->name }}" name="name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">图标</label>
+                        <label for="example-text-input" class="col-2 col-form-label">别名</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="{{ $record->icon}}" name="icon">
+                            <input class="form-control" type="text" value="{{ $record->alias_name }}" name="alias_name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">地址</label>
+                        <label for="example-text-input" class="col-2 col-form-label">描述</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="{{ $record->action}}" name="action">
+                            <input class="form-control" type="text" value="{{ $record->description }}" name="description">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">目标</label>
+                        <label for="example-text-input" class="col-2 col-form-label">封面</label>
                         <div class="col-10">
-                            <select class="form-control" id="exampleSelectd" name="target">
-                                <option @if($record->target == '_self') selected @endif value="_self">相同的框架中(_self)</option>
-                                <option @if($record->target == '_blank') selected @endif value="_blank">在新窗口中(_blank)</option>
-                                <option @if($record->target == '_parent') selected @endif value="_parent">在父框架集中(_parent)</option>
-                                <option @if($record->target == '_top') selected @endif value="_top">在整个窗口中(_top)</option>
-                            </select>
+                            <input class="form-control" type="text" value="{{ $record->cover }}" name="cover">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -115,13 +110,29 @@
                             <input class="form-control" type="text" value="{{ $record->order }}" name="order">
                         </div>
                     </div>
+                    @foreach ($record->options['key'] as $key=>$optionKey)
+                    <div class="form-group row option-key-value">
+                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>
+                        <div class="col-4">
+                            <input class="form-control" type="text" value="{{$optionKey}}" name="options[key][]">
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" type="text" value="{{$record->options['value'][$key]}}" name="options[value][]">
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-danger" onclick="removeThisOption(this)">删除此项</button>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-3">
                             </div>
-                            <div class="col-10">
+                            <div class="col-7">
+                                <button type="button" class="btn btn-primary" onclick="addNewOption();">新增配置项</button>
+                                <button type="button" class="btn btn-primary" onclick="reduceOption();">减少配置项</button>
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
@@ -134,6 +145,39 @@
 @endsection
 <!-- end:: Content -->
 @section('page_js')
+    <script>
+        function addNewOption() {
+            var optionHtml = getOptionHtml();
+            $("#main_form").append(optionHtml);
+        }
+
+        function reduceOption() {
+            $(".option-key-value:last").remove()
+        }
+
+        function removeThisOption(e) {
+            $(e).parent().parent().remove();
+        }
+
+        function getOptionHtml() {
+            option_dom = '<div class="form-group row option-key-value">\n' +
+                '                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>\n' +
+                '                        <div class="col-4">\n' +
+                '                            <input class="form-control" type="text" value="" name="options[key][]">\n' +
+                '                        </div>\n' +
+                '                        <div class="col-4">\n' +
+                '                            <input class="form-control" type="text" value="" name="options[value][]">\n' +
+                '                        </div>\n' +
+                '                        <div class="col-2">\n' +
+                '                            <button type="button" class="btn btn-danger" onclick="removeThisOption(this)">删除此项</button>\n' +
+                '                        </div>\n' +
+                '                    </div>';
+
+            return option_dom;
+        }
+
+
+    </script>
     <!--begin::Page Vendors(used by this page) -->
 
 

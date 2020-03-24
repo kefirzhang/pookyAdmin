@@ -9,14 +9,14 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    新增分类 </h3>
+                    分类详情 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
+                    <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">详情页 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="" class="kt-subheader__breadcrumbs-link">新增</a>
+                    <a href="" class="kt-subheader__breadcrumbs-link">详情</a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
@@ -24,7 +24,7 @@
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
                     <a href="{{ route('category.create') }}" class="btn kt-subheader__btn-primary">
-                        新增分类 &nbsp;
+                        分类详情 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
@@ -40,13 +40,14 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        新建分类
+                        详情
                     </h3>
                 </div>
             </div>
 
             <!--begin::Form-->
-            <form method="POST" action="{{ route('category.store') }}" class="kt-form kt-form--label-right">
+            <form method="POST" action="{{ route('category.update',$record->id) }}"
+                  class="kt-form kt-form--label-right">
                 @csrf
                 <div class="kt-portlet__body" id="main_form">
                     @if (count($errors) > 0)
@@ -67,117 +68,59 @@
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">父类</label>
                         <div class="col-10">
-                            <select class="form-control" name="parent_id">
-                                <option value="0">--</option>
-                                @foreach ($topCategoryList as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
+                            <input class="form-control" readonly type="text" value="{{ $record->parent_name }}"
+                                   name="name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">名称</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="name">
+                            <input class="form-control" readonly type="text" value="{{ $record->name }}" name="name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">别名</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="alias_name">
+                            <input class="form-control" readonly type="text" value="{{ $record->alias_name }}"
+                                   name="alias_name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">描述</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="description">
+                            <input class="form-control" readonly type="text" value="{{ $record->description }}"
+                                   name="description">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">封面</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="cover">
+                            <input class="form-control" readonly type="text" value="{{ $record->cover }}" name="cover">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">排序</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="9999" name="order">
+                            <input class="form-control" readonly type="text" value="{{ $record->order }}" name="order">
                         </div>
                     </div>
-                    <div class="form-group row option-key-value">
-                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>
-                        <div class="col-4">
-                            <input class="form-control" type="text" value="" name="options[key][]">
-                        </div>
-                        <div class="col-4">
-                            <input class="form-control" type="text" value="" name="options[value][]">
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-danger" onclick="removeThisOption(this)">删除此项</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="kt-portlet__foot">
-                    <div class="kt-form__actions">
-                        <div class="row">
-                            <div class="col-3">
+                    @foreach ($record->options['key'] as $key=>$optionKey)
+                        <div class="form-group row option-key-value">
+                            <label for="example-text-input" class="col-2 col-form-label">配置项</label>
+                            <div class="col-4">
+                                <input class="form-control" readonly type="text" value="{{$optionKey}}" name="options[key][]">
                             </div>
-                            <div class="col-7">
-                                <button type="button" class="btn btn-primary" onclick="addNewOption();">新增配置项</button>
-                                <button type="button" class="btn btn-primary" onclick="reduceOption();">减少配置项</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            <div class="col-4">
+                                <input class="form-control" readonly type="text" value="{{$record->options['value'][$key]}}" name="options[value][]">
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
+
             </form>
         </div>
     </div>
 @endsection
 <!-- end:: Content -->
 @section('page_js')
-    <script>
-        function addNewOption() {
-            var optionHtml = getOptionHtml();
-            $("#main_form").append(optionHtml);
-        }
-
-        function reduceOption() {
-            $(".option-key-value:last").remove()
-        }
-
-        function removeThisOption(e) {
-            $(e).parent().parent().remove();
-        }
-
-        function getOptionHtml() {
-            option_dom = '<div class="form-group row option-key-value">\n' +
-                '                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>\n' +
-                '                        <div class="col-4">\n' +
-                '                            <input class="form-control" type="text" value="" name="options[key][]">\n' +
-                '                        </div>\n' +
-                '                        <div class="col-4">\n' +
-                '                            <input class="form-control" type="text" value="" name="options[value][]">\n' +
-                '                        </div>\n' +
-                '                        <div class="col-2">\n' +
-                '                            <button type="button" class="btn btn-danger" onclick="removeThisOption(this)">删除此项</button>\n' +
-                '                        </div>\n' +
-                '                    </div>';
-
-            return option_dom;
-        }
-
-
-    </script>
-    <!--begin::Page Vendors(used by this page) -->
-
-
-    <!--end::Page Vendors -->
-
-    <!--begin::Page Scripts(used by this page) -->
-
-
-    <!--end::Page Scripts -->
 @endsection
