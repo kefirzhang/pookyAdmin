@@ -1,103 +1,121 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
+@section('page_style')
+@endsection
+
+@section('subheader')
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    模型管理 </h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">列表 </a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">模型列表 </a>
+
+                    <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+                </div>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <a href="{{ route('object.create') }}" class="btn kt-subheader__btn-primary">
+                        新增模型 &nbsp;
+                        <!--<i class="flaticon2-calendar-1"></i>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+
+<!-- begin:: Content -->
 @section('content')
-<!-- BEGIN PAGE HEADER-->
-<!-- BEGIN PAGE BAR -->
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <a href="{{url('admin')}}">后台管理</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="{{url('admin/item')}}">项目管理</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <span>项目列表</span>
-        </li>
-    </ul>
-</div>
-<!-- END PAGE BAR -->
-<!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> 项目列表
-    <small>Item List</small>
-</h1>
-<!-- END PAGE TITLE-->
-<!-- END PAGE HEADER-->
-@if (count($errors) > 0)
-    @foreach ($errors->all() as $error)
-        <div class="note note-danger">
-            <p> {{ $error }} </p>
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        @if (count($errors) > 0)
+        <div class="alert alert-secondary" role="alert">
+            <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+            <div class="alert-text">
+                @foreach ($errors->all() as $error)
+                    <div class="note note-danger">
+                        <p> {{ $error }} </p>
+                    </div>
+                @endforeach
+            </div>
         </div>
-    @endforeach
-@endif
-<div class="row">
-	<div class="col-md-12">
-		<div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-cogs"></i>数据标题
-                </div>
-                <div class="actions">
-                    <a href="{{url('admin/item/create')}}" class="btn btn-default btn-sm">
-                        <i class="fa fa-plus"></i> Add </a>
-                    <a href="javascript:;" class="btn btn-default btn-sm">
-                        <i class="fa fa-print"></i> Print </a>
+        @endif
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        模型列表
+                    </h3>
                 </div>
             </div>
-            <div class="portlet-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
+            <div class="kt-portlet__body">
+
+                <!--begin::Section-->
+                <div class="kt-section">
+                    <div class="kt-section__content">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <th>操作</th>
                                 <th>ID</th>
+                                <th>类别</th>
                                 <th>名称</th>
-                                <th>分类</th>
-                                <th>配置</th>
+                                <th>别名</th>
+                                <th>图标</th>
+                                <th>类型</th>
+                                <th>排序</th>
                                 <th>操作</th>
-                                <th>删除</th>
-                                
                             </tr>
-                        </thead>
-                        <tbody>
-                        	@foreach ($items as $item)
-                            <tr>
-                                <td> <input type="checkbox" name="" value="{{$item->id}}"/> </td>
-                                <td> {{$item->id}} </td>
-                                <td> {{$item->name}}</td>
-                                <td> {{$item->category_name}}</td>
-                                <td> 
-                                	<a href="{{ url('admin/unit/'.$item->id) }}" class="btn btn-info">配置项</a>
-                                </td>
-                                <td> 
-                                	<a href="{{ url('admin/item/'.$item->id) }}" class="btn btn-info">查看</a>
-                          	  		<a href="{{ url('admin/item/'.$item->id.'/edit') }}" class="btn btn-info">编辑</a> 
-                          	  	</td>
-                                <td> 
-                                	<form action="{{ url('admin/item/'.$item->id) }}" method="POST">
-                                    {!! csrf_field() !!}
-                                    {!! method_field('DELETE') !!}
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>删除
-                                        </button>
-                                 	</form>
-                               </td>
-                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($records as $record)
+                                <tr>
+                                    <th scope="row">{{ $record->id }}</th>
+                                    <td>{{ $record->category_id }}</td>
+                                    <td>{{ $record->name }}</td>
+                                    <td>{{ $record->alias_name }}</td>
+                                    <td>{{ $record->type }}</td>
+                                    <td>{{ $record->cover }}</td>
+                                    <td>{{ $record->order }}</td>
+                                    <td>
+                                        <a title="Show meta" href="{{ route('meta.index') }}?object_id={{ $record->id }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-bars"></i>
+                                        </a>
+                                        <a title="Show details" href="{{ route('object.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-search"></i>
+                                        </a>
+                                        <a title="Edit details" href="{{ route('object.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-edit"></i>
+                                        </a>
+                                        <form action="{{ route('object.destroy',$record->id) }}" method="POST" style="display:inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                                <i class="la la-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="row text-center">
-                	<div class="col-md-12">
-                		<div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_2_paginate">
-                			{!! $items->links() !!}
-                		</div>	
-                	</div>
-				</div>
+
+                <!--end::Section-->
             </div>
+
+            <!--end::Form-->
         </div>
-	</div>
-</div>
+    </div>
+@endsection
+<!-- end:: Content -->
+@section('page_js')
 @endsection

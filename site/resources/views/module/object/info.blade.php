@@ -1,164 +1,132 @@
-@extends('layouts.admin')
+@extends('layouts.app')
+@section('page_style')
+    <!--begin::Page Vendors Styles(used by this page) -->
+    <!--end::Page Vendors Styles -->
+@endsection
 
-@section('content')
-<!-- BEGIN PAGE HEADER-->
-<!-- BEGIN PAGE BAR -->
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <a href="{{url('admin')}}">后台管理</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="{{url('admin/item')}}">项目管理</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <span>项目详情</span>
-        </li>
-    </ul>
-</div>
-<!-- END PAGE BAR -->
-<!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> 项目详情
-    <small>Item Detail</small>
-</h1>
-<!-- END PAGE TITLE-->
-<!-- END PAGE HEADER-->
-@if (count($errors) > 0)
-    @foreach ($errors->all() as $error)
-        <div class="note note-danger">
-            <p> {{ $error }} </p>
-        </div>
-    @endforeach
-@endif
-<div class="row">
-	<div class="col-md-6">
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-share font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">详情</span>
-                </div>
-                <div class="actions">
-                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                        <i class="icon-cloud-upload"></i>
-                    </a>
-                    <a class="btn btn-circle btn-icon-only btn-default" href="{{ url('admin/item/'.$item->id.'/edit') }}">
-                        <i class="icon-wrench"></i>
-                    </a>
-                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                        <i class="icon-trash"></i>
-                    </a>
+@section('subheader')
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    模型详情 </h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="{{ route('object.index') }}" class="kt-subheader__breadcrumbs-link">详情页 </a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">详情</a>
+
+                    <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
             </div>
-            <div class="portlet-body">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">名称</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->name}} </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <a href="{{ route('object.create') }}" class="btn kt-subheader__btn-primary">
+                        模型详情 &nbsp;
+                        <!--<i class="flaticon2-calendar-1"></i>-->
+                    </a>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">英文名称</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->en_name}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">别名</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->alias_name}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">英文别名</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->alias_en_name}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">suid</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->suid}} </div>
-                </div>                       
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">父类</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->category_name}} </div>
-                </div>            
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">描述</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->description}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">封面图</h3>
-                    </div>
-                    <div class="panel-body"> 
-                    	<img src="{{ asset('storage/'.$item->cover) }}" style="width:50px;height:50px;" /> 
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">类型</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->type}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">时间类型</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->period_type}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">官网</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->official_site}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">官方更新时间</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->official_update_time}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">排序</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->order}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">seo_title</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->seo_title}} </div>
-                </div>            
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">seo_keywords</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->seo_keywords}} </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">seo_description</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->seo_description}} </div>
-                </div>            
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">扩展信息</h3>
-                    </div>
-                    <div class="panel-body"> {{$item->ext_info}} </div>
-                </div>                                        
             </div>
         </div>
     </div>
-</div>
+@endsection
+
+<!-- begin:: Content -->
+@section('content')
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        详情
+                    </h3>
+                </div>
+            </div>
+
+            <!--begin::Form-->
+            <form method="POST" action="{{ route('object.update',$record->id) }}"
+                  class="kt-form kt-form--label-right">
+                @csrf
+                <div class="kt-portlet__body" id="main_form">
+                    @if (count($errors) > 0)
+                        <div class="form-group form-group-last">
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
+                                    @foreach ($errors->all() as $error)
+                                        <div class="note note-danger">
+                                            <p> {{ $error }} </p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">分类</label>
+                        <div class="col-10">
+                            <input class="form-control" readonly type="text" value="{{ $record->category_name }}"
+                                   name="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">名称</label>
+                        <div class="col-10">
+                            <input class="form-control" readonly type="text" value="{{ $record->name }}" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">别名</label>
+                        <div class="col-10">
+                            <input class="form-control" readonly type="text" value="{{ $record->alias_name }}"
+                                   name="alias_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">描述</label>
+                        <div class="col-10">
+                            <input class="form-control" readonly type="text" value="{{ $record->description }}"
+                                   name="description">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">封面</label>
+                        <div class="col-10">
+                            <input class="form-control" readonly type="text" value="{{ $record->cover }}" name="cover">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">类别</label>
+                        <div class="col-10">
+                            <input class="form-control" readonly type="text" value="{{ $record->type }}" name="order">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">排序</label>
+                        <div class="col-10">
+                            <input class="form-control" readonly type="text" value="{{ $record->order }}" name="order">
+                        </div>
+                    </div>
+                    @foreach ($record->options['key'] as $key=>$optionKey)
+                        <div class="form-group row option-key-value">
+                            <label for="example-text-input" class="col-2 col-form-label">配置项</label>
+                            <div class="col-4">
+                                <input class="form-control" readonly type="text" value="{{$optionKey}}" name="options[key][]">
+                            </div>
+                            <div class="col-4">
+                                <input class="form-control" readonly type="text" value="{{$record->options['value'][$key]}}" name="options[value][]">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </form>
+        </div>
+    </div>
+@endsection
+<!-- end:: Content -->
+@section('page_js')
 @endsection

@@ -1,174 +1,189 @@
-@extends('layouts.admin')
+@extends('layouts.app')
+@section('page_style')
+    <!--begin::Page Vendors Styles(used by this page) -->
+    <!--end::Page Vendors Styles -->
+@endsection
 
-@section('content')
-<!-- BEGIN PAGE HEADER-->
-<!-- BEGIN PAGE BAR -->
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <a href="{{url('admin')}}">后台管理</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="{{url('admin/item')}}">项目管理</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <span>新增项目</span>
-        </li>
-    </ul>
-</div>
-<!-- END PAGE BAR -->
-<!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> 新增项目
-    <small>New Item</small>
-</h1>
-<!-- END PAGE TITLE-->
-<!-- END PAGE HEADER-->
-@if (count($errors) > 0)
-    @foreach ($errors->all() as $error)
-        <div class="note note-danger">
-            <p> {{ $error }} </p>
-        </div>
-    @endforeach
-@endif
-<div class="row">
-    <div class="col-md-6">
-        <!-- BEGIN SAMPLE FORM PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-red-sunglo">
-                    <i class="icon-social-dribbble font-blue-sharp"></i>
-                    <span class="caption-subject font-blue-sharp bold uppercase"> 项目信息</span>
+@section('subheader')
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    新增模型 </h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="{{ route('object.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">新增</a>
+
+                    <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
             </div>
-            <div class="portlet-body form">
-                <form action="{{ url('admin/item') }}" method="POST" class="form-horizontal" enctype="multipart/form-data" >
-    				{!! csrf_field() !!}
-                    <div class="form-body">
-                    	<div class="form-group">
-                            <label class="col-md-3 control-label">所属分类</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="category_id">
-                                    <option value="0">--</option>
-                                    @foreach ($categorys as $category)
-                                  	<option value="{{$category->id}}">{{$category->name}}</option>
-                                  	@endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">名称</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text"  name="name"> 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">英文名称</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text"  name="en_name"> 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">别名</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text"  name="alias_name"> 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">英文别名</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text"  name="alias_en_name"> 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">简介</label>
-                            <div class="col-md-9">
-                            	<textarea class="form-control" rows="3" name="description"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">扩展信息</label>
-                            <div class="col-md-9">
-                            	<textarea class="form-control" rows="3" name="ext_info"></textarea>
-                            </div>
-                        </div>                        
-                        <div class="form-group">
-                            <label for="exampleInputFile1"  class="col-md-3 control-label">封面图片</label>
-                            <div class="col-md-9">
-                                <input type="file" id="exampleInputFile1" name="cover">
-                                <p class="help-block"> 封面图片</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">类型</label>
-                            <div class="col-md-9">
-                            	<select class="form-control" name="type">
-            			        	@foreach ($item_type['type'] as $type_key=>$type_value)
-                                  	<option value="{{$type_key}}">{{$type_value}}</option>
-                                  	@endforeach
-                                </select>
-                           	</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">周期</label>
-                            <div class="col-md-9">
-                            	<select class="form-control" name="period_type">
-            			        	@foreach ($item_type['period_type'] as $period_key=>$period_value)
-                                  	<option value="{{$period_key}}">{{$period_value}}</option>
-                                  	@endforeach
-                                </select>
-                           	</div>
-                        </div>                                                
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">排序</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text" name="order" value="999"> 
-                           	</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">官方网站</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text" name="official_site" value=""> 
-                           	</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">官方更新时间</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text" name="official_update_time" value=""> 
-                           	</div>
-                        </div>                                                                             
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">seo_title</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text" name="seo_title"> 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">seo_keywords</label>
-                            <div class="col-md-9">
-                            	<input class="form-control spinner" type="text" name="seo_keywords"> 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">seo_description</label>
-                            <div class="col-md-9">
-                            	<textarea class="form-control" rows="3" name="seo_description"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-actions center">
-                    	<div class="row">
-                    		<div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn blue">Submit</button>
-                                <button type="button" class="btn default">Cancel</button>
-                    		</div>
-                    	</div>
-                    </div>
-                </form>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <a href="{{ route('object.create') }}" class="btn kt-subheader__btn-primary">
+                        新增模型 &nbsp;
+                        <!--<i class="flaticon2-calendar-1"></i>-->
+                    </a>
+                </div>
             </div>
         </div>
-        <!-- END SAMPLE FORM PORTLET-->
-     </div>
-</div>
+    </div>
+@endsection
+
+<!-- begin:: Content -->
+@section('content')
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        新建模型
+                    </h3>
+                </div>
+            </div>
+
+            <!--begin::Form-->
+            <form method="POST" action="{{ route('object.store') }}" class="kt-form kt-form--label-right">
+                @csrf
+                <div class="kt-portlet__body" id="main_form">
+                    @if (count($errors) > 0)
+                        <div class="form-group form-group-last">
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
+                                    @foreach ($errors->all() as $error)
+                                        <div class="note note-danger">
+                                            <p> {{ $error }} </p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">父类</label>
+                        <div class="col-10">
+                            <select class="form-control" name="category_id">
+                                <option value="0">--</option>
+                                @foreach ($categoryList as $object)
+                                    <option value="{{$object['id']}}">{{$object['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">名称</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">别名</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="alias_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">描述</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="description">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">封面</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="cover">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">类别</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="type">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">排序</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="9999" name="order">
+                        </div>
+                    </div>
+                    <div class="form-group row option-key-value">
+                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>
+                        <div class="col-4">
+                            <input class="form-control" type="text" value="" name="options[key][]">
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" type="text" value="" name="options[value][]">
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-danger" onclick="removeThisOption(this)">删除此项</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions">
+                        <div class="row">
+                            <div class="col-3">
+                            </div>
+                            <div class="col-7">
+                                <button type="button" class="btn btn-primary" onclick="addNewOption();">新增配置项</button>
+                                <button type="button" class="btn btn-primary" onclick="reduceOption();">减少配置项</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+<!-- end:: Content -->
+@section('page_js')
+    <script>
+        function addNewOption() {
+            var optionHtml = getOptionHtml();
+            $("#main_form").append(optionHtml);
+        }
+
+        function reduceOption() {
+            $(".option-key-value:last").remove()
+        }
+
+        function removeThisOption(e) {
+            $(e).parent().parent().remove();
+        }
+
+        function getOptionHtml() {
+            option_dom = '<div class="form-group row option-key-value">\n' +
+                '                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>\n' +
+                '                        <div class="col-4">\n' +
+                '                            <input class="form-control" type="text" value="" name="options[key][]">\n' +
+                '                        </div>\n' +
+                '                        <div class="col-4">\n' +
+                '                            <input class="form-control" type="text" value="" name="options[value][]">\n' +
+                '                        </div>\n' +
+                '                        <div class="col-2">\n' +
+                '                            <button type="button" class="btn btn-danger" onclick="removeThisOption(this)">删除此项</button>\n' +
+                '                        </div>\n' +
+                '                    </div>';
+
+            return option_dom;
+        }
+
+
+    </script>
+    <!--begin::Page Vendors(used by this page) -->
+
+
+    <!--end::Page Vendors -->
+
+    <!--begin::Page Scripts(used by this page) -->
+
+
+    <!--end::Page Scripts -->
 @endsection
