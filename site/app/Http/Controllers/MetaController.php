@@ -45,7 +45,7 @@ class MetaController extends Controller
                 ) {
                     continue;
                 }
-            }else {
+            } else {
                 $meta = new Meta();
             }
             // 新建
