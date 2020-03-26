@@ -85,7 +85,7 @@
                                     <td>{{ $record->cover }}</td>
                                     <td>{{ $record->order }}</td>
                                     <td>
-                                        <a title="Show meta" href="{{ route('meta.index') }}?object_id={{ $record->id }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                        <a title="Show meta" href="{{ route('meta.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-bars"></i>
                                         </a>
                                         <a title="Show details" href="{{ route('object.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
