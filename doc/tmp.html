@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="form-group row">
+    <input type="hidden" name="id[]" value="{{$meta->id}}" />
+    <label  class="col-2 control-label">配置</label>
+    <div class="col-2">
+        <select class="form-control" name="type[]">
+            <option value="0">请选择</option>
+            @if($meta->type == 1)
+            <option value="1" selected="selected">X轴</option>
+            <option value="2">Y轴</option>
+            @elseif($meta->type ==2)
+            <option value="1">X轴</option>
+            <option value="2" selected="selected">Y轴</option>
+            @else
+            <option value="1">X轴</option>
+            <option value="2">Y轴</option>
+            @endif
+        </select>
+    </div>
+    <div class="col-2">
+        <select class="form-control" name="content_type[]">
+            <option value="0">请选择</option>
+            @if($meta->content_type == 1)
+            <option value="1" selected="selected">文本</option>
+            <option value="2">图片</option>
+            @elseif($meta->content_type ==2)
+            <option value="1">文本</option>
+            <option value="2" selected="selected">图片</option>
+            @else
+            <option value="1">文本</option>
+            <option value="2">图片</option>
+            @endif
+        </select>
+    </div>
+    <div class="col-2">
+        <input type="text" name="name[]"  class="form-control spinner"  placeholder="名称" value="{{$meta->name}}">
+    </div>
+    <div class="col-2">
+        <input type="text" name="ext_name[]"  class="form-control spinner"  placeholder="别名" value="{{$meta->ext_name}}">
+    </div>
+    <div class="col-1">
+        <input type="text" name="order[]" class="form-control spinner"  placeholder="排序" value="{{$meta->order}}" >
+    </div>
+    <div class="col-1">
+        <button type="button" class="btn btn-danger" onclick="removeThisUnit(this)">删除此项</button>
+    </div>
+</div>
+
+
+</body>
+<script>
+    option_dom  = '';
+    option_dom += '<div class="form-group row">';
+    option_dom += '<label class="col-1 control-label">配置</label>';
+    option_dom += '<div class="col-2">';
+    option_dom += '<select class="form-control" name="type[]">';
+    option_dom += '<option value="0">请选择</option>';
+    option_dom += '<option value="1">X轴</option>';
+    option_dom += '<option value="2" selected="selected">Y轴</option>';
+    option_dom += '</select>';
+    option_dom += '</div>';
+    option_dom += '<div class="col-2">';
+    option_dom += '<select class="form-control" name="content_type[]">';
+    option_dom += '<option value="0">请选择</option>';
+    option_dom += '<option value="1" selected="selected">文本</option>';
+    option_dom += '<option value="2">图片</option>';
+    option_dom += '</select>';
+    option_dom += '</div>';
+    option_dom += '<div class="col-2">';
+    option_dom += '<input type="text" name="name[]" class="form-control spinner"  placeholder="名称" value="'+rank+'">';
+    option_dom += '</div>';
+    option_dom += '<div class="col-2">';
+    option_dom += '<input type="text" name="ext_name[]" class="form-control spinner"  placeholder="别名" value="'+rank+'">';
+    option_dom += '</div>';
+    option_dom += '<div class="col-2">';
+    option_dom += '<input type="text" name="order[]" class="form-control spinner"  placeholder="排序" value="'+rank+'">';
+    option_dom += '</div>';
+    option_dom += '<div class="col-1">';
+    option_dom += '<button type="button" class="btn btn-danger" onclick="removeThisOption(this)">删除此项</button>';
+    option_dom += '</div>';
+    option_dom += '</div>';
+</script>
+</html>
