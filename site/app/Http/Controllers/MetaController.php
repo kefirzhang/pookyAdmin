@@ -14,7 +14,7 @@ class MetaController extends Controller
     //$id 为object 的id
     public function show($object_id)
     {
-        $metas = Meta::where('object_id', $object_id)->orderBy('type', 'asc')->orderBy('order', 'desc')->get();
+        $metas = Meta::where('object_id', $object_id)->orderBy('type', 'asc')->orderBy('order', 'asc')->get();
         $object = Objects::find($object_id);
         //$object->type = Objects::$object_type['type'][$object->type];
         //$object->period_type = Objects::$object_type['period_type'][$object->period_type];
@@ -30,7 +30,8 @@ class MetaController extends Controller
         $pre_meta_ids = Meta::where('object_id', $object_id)->pluck('id')->toArray(); //上一次的配置项
 
         $request->id = $request->id ? $request->id : []; //是否有新增 如果为空 则全部为新增
-        if (count($request->name) == 0) {
+
+        if (is_null($request->name) or count($request->name) == 0) {
             return redirect()->back()->withInput()->withErrors('至少有一个配置项！');
         }
         foreach ($request->name as $key => $name) {
