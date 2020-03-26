@@ -46,7 +46,7 @@
             </div>
 
             <!--begin::Form-->
-            <form method="POST" action="{{ route('category.store') }}" class="kt-form kt-form--label-right">
+            <form method="POST" action="{{ route('meta.store') }}" class="kt-form kt-form--label-right">
                 @csrf
                 <div class="kt-portlet__body" >
                     @if (count($errors) > 0)
@@ -79,6 +79,7 @@
                         </div>
                         @foreach ($metas as $meta)
                         <div class="form-group row">
+                            <input type="hidden" name="id[]" value="{{ $meta->id }}" />
                             <label class="col-1 col-form-label">配置</label>
                             <div class="col-2">
                                 <select class="form-control" name="type[]">
@@ -117,7 +118,7 @@
                                 <input type="text" name="name[]" class="form-control spinner" placeholder="名称" value="{{ $meta->name }}">
                             </div>
                             <div class="col-2">
-                                <input type="text" name="alias_name[]" class="form-control spinner" placeholder="别名" value="{{ $meta->ext_name }}">
+                                <input type="text" name="alias_name[]" class="form-control spinner" placeholder="别名" value="{{ $meta->alias_name }}">
                             </div>
                             <div class="col-2">
                                 <input type="text" name="order[]" class="form-control spinner" placeholder="排序" value="{{ $meta->order }}">
@@ -159,7 +160,7 @@
                             </div>
                             <div class="col-7">
                                 <button type="button" class="btn btn-primary" onclick="addNewOption();">新增配置项</button>
-                                <button type="button" class="btn btn-primary" onclick="reduceOption();">减少配置项</button>
+                                <input type="hidden" name="object_id" value="{{$object->id}}" />
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
