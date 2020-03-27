@@ -13,3 +13,5 @@ php artisan make:migration add_votes_to_users_table --table=users
 
 
 php artisan migrate
+
+{{ isset($sysOptions['site_title'])?$sysOptions['site_title']->value:'请配置 site_title'}}
