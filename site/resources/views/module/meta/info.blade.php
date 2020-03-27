@@ -190,7 +190,7 @@
             $("#main_form").append(option_dom);
         }
         function addNewOption() {
-            var optionHtml = getOptionHtml("","");
+            var optionHtml = getOptionHtml("","9999");
             $("#main_form").append(optionHtml);
         }
 
