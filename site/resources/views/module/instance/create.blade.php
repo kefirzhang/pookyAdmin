@@ -65,9 +65,9 @@
                     @endif
 
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">父类</label>
+                        <label for="example-text-input" class="col-2 col-form-label">模型</label>
                         <div class="col-10">
-                            <select class="form-control" name="parent_id">
+                            <select class="form-control" name="object_id">
                                 <option value="0">--</option>
                                 @foreach ($objectList as $object)
                                     <option value="{{$object->id}}">{{$object->name}}</option>

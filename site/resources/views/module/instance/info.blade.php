@@ -66,7 +66,7 @@
                     @endif
 
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">父类</label>
+                        <label for="example-text-input" class="col-2 col-form-label">模型</label>
                         <div class="col-10">
                             <input class="form-control" readonly type="text" value="{{ $record->object_name }}"
                                    name="name">

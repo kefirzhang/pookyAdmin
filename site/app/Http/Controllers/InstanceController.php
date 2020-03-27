@@ -104,7 +104,7 @@ class InstanceController extends Controller
         $instance = Instance::find($id);
         $instance->options = json_decode($instance->options, true);
         if ($instance->object_id != 0) {
-            $object_info = Object::find($instance->object_id);
+            $object_info = Objects::find($instance->object_id);
             $instance->object_name = $object_info->name;
         } else {
             $instance->object_name = '顶级分类';

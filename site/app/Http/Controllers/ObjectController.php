@@ -13,7 +13,7 @@ class ObjectController extends Controller
 {
     public function index(Request $request)
     {
-        $records = Objects::paginate(20);
+        $records = Objects::orderBy('id', 'desc')->paginate(20);
         return view('module.object.index', ['records' => $records]);
 
     }
