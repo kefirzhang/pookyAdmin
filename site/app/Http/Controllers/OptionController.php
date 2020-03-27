@@ -1,44 +1,40 @@
 <?php
-/**
- * @desc 示例流程 Controller Model view curd
- */
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
-use App\Model\Option as CModel; // 别名 统一Model 调用
+use App\Model\Option;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Storage;
+
 
 class OptionController extends Controller
 {
-
-    private $viewDir = 'module.option.';
-    private $metaData; //元数据描述
-    private $validateRule; //验证条件
-    private $moduleConf = [
-        'moduleRoutePre' => 'option',
-        'moduleTips'     => '配置项管理-Option'
-    ];
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->metaData = CModel::getMetaData();
-        $this->validateRule = CModel::getValidateRule();
-        View::share('metaData', $this->metaData); //共享元数据
-        View::share('moduleConf', $this->moduleConf); //共享元数据
+        $records = Option::orderBy('id', 'desc')->paginate(20);
+        return view('module.option.index', ['records' => $records]);
+
+    }
+
+    public function create()
+    {
+        return view('module.option.create');
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, $this->validateRule);
-        $option = new CModel;
-        foreach ($this->metaData as $meta) {
-            $option->{$meta['name']} = $request->{$meta['name']};
-        }
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'alias_name' => 'required|max:255',
+            'value' => 'required',
+            'autoload' => 'required',
+        ]);
+        $option = new Option;
+        $option->name = $request->name;
+        $option->alias_name = $request->alias_name;
+        $option->value = $request->value;
+        $option->autoload = $request->autoload;
         if ($option->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
         } else {
@@ -46,27 +42,34 @@ class OptionController extends Controller
         }
     }
 
-    public function index()
+    public function destroy($id)
     {
-        $records = CModel::orderBy('id', 'desc')->paginate(env('LIST_PAGE_SIZE'));;
-        return view($this->viewDir . 'index', ['records' => $records]);
+        Option::find($id)->delete();
+        return redirect()->back()->withInput()->withErrors('删除成功！');
     }
 
-    public function create(Request $request)
+    public function edit($id)
     {
-        return view($this->viewDir . 'create');
+        $option = Option::find($id);
+        return view('module.option.edit', ['record' => $option]);
     }
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->validateRule);
-        $option = CModel::find($id);
-        foreach ($this->metaData as $meta) {
-            $option->{$meta['name']} = $request->{$meta['name']};
-        }
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'alias_name' => 'required|max:255',
+            'value' => 'required',
+            'autoload' => 'required',
+        ]);
+        $option = Option::find($id);
+        $option->name = $request->name;
+        $option->alias_name = $request->alias_name;
+        $option->value = $request->value;
+        $option->autoload = $request->autoload;
 
         if ($option->save()) {
-            return redirect()->back()->withInput()->withErrors('更新成功！');
+            return redirect()->back()->withInput()->withErrors('保存成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
@@ -74,22 +77,7 @@ class OptionController extends Controller
 
     public function show($id)
     {
-
-        $record = CModel::find($id);
-
-        return view($this->viewDir . 'show', ['record' => $record]);
+        $option = Option::find($id);
+        return view('module.option.info', ['record' => $option]);
     }
-
-    public function destroy($id)
-    {
-        CModel::find($id)->delete();
-        return redirect()->back()->withInput()->withErrors('删除成功！');
-    }
-
-    public function edit($id)
-    {
-        $record = CModel::find($id);
-        return view($this->viewDir . 'edit', ['record' => $record]);
-    }
-
 }

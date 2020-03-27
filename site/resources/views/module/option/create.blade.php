@@ -9,22 +9,22 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    {{ $moduleConf['moduleTips'] }}</h3>
+                    新增配置项 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
-                    <a href="{{ route('index') }}" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route($moduleConf['moduleRoutePre'].'.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
+                    <a href="{{ route('option.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="javascript:;" class="kt-subheader__breadcrumbs-link">新建 </a>
+                    <a href="" class="kt-subheader__breadcrumbs-link">新增</a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
             </div>
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
-                    <a href="{{ route($moduleConf['moduleRoutePre'].'.create') }}" class="btn kt-subheader__btn-primary">
-                        新增
+                    <a href="{{ route('option.create') }}" class="btn kt-subheader__btn-primary">
+                        新增配置项 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
@@ -40,15 +40,15 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        {{ $moduleConf['moduleTips']  }}
+                        新建配置项
                     </h3>
                 </div>
             </div>
 
             <!--begin::Form-->
-            <form method="POST" action="{{ route($moduleConf['moduleRoutePre'].'.store') }}" class="kt-form kt-form--label-right">
+            <form method="POST" action="{{ route('option.store') }}" class="kt-form kt-form--label-right">
                 @csrf
-                <div class="kt-portlet__body">
+                <div class="kt-portlet__body" id="main_form">
                     @if (count($errors) > 0)
                         <div class="form-group form-group-last">
                             <div class="alert alert-secondary" role="alert">
@@ -63,21 +63,40 @@
                             </div>
                         </div>
                     @endif
-                    @foreach ($metaData as $meta)
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-2 col-form-label">{{ $meta['show_name'] }}</label>
-                            <div class="col-10">
-                                <input class="form-control" type="{{ $meta['type'] }}" value="{{ old($meta['name']) }}" name="{{ $meta['name'] }}">
-                            </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">配置项</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="name">
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">配置别名</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="alias_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">配置内容</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" name="value">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">自动加载</label>
+                        <div class="col-10">
+                            <select class="form-control" name="autoload">
+                                <option value="0">NO</option>
+                                <option value="1">YES</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-3">
                             </div>
-                            <div class="col-10">
+                            <div class="col-7">
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
@@ -90,6 +109,7 @@
 @endsection
 <!-- end:: Content -->
 @section('page_js')
+
     <!--begin::Page Vendors(used by this page) -->
 
 

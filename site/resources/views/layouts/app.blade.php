@@ -23,8 +23,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--end::Base Path -->
     <meta charset="utf-8" />
-    <title>Pooky | DO SOMETHING I WANT ,NOT I NEED</title>
-    <meta name="description" content="Page with empty content">
+    <title>{{ isset($sysOptions['site_title'])?$sysOptions['site_title']->value:'请配置 site_title'}} </title>
+    <meta name="description" content="{{ isset($sysOptions['site_description'])?$sysOptions['site_description']->value:'请配置 site_title'}}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--begin::Fonts -->

@@ -8,22 +8,22 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    {{ $moduleConf['moduleTips'] }}</h3>
+                    配置项管理 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
-                    <a href="{{ route('index') }}" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route($moduleConf['moduleRoutePre'].'.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
+                    <a href="" class="kt-subheader__breadcrumbs-link">列表 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="javascript:;" class="kt-subheader__breadcrumbs-link">列表 </a>
+                    <a href="" class="kt-subheader__breadcrumbs-link">配置项列表 </a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
             </div>
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
-                    <a href="{{ route($moduleConf['moduleRoutePre'].'.create') }}" class="btn kt-subheader__btn-primary">
-                        新增
+                    <a href="{{ route('option.create') }}" class="btn kt-subheader__btn-primary">
+                        新增配置项 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
@@ -52,7 +52,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Bordered Table
+                        配置项列表
                     </h3>
                 </div>
             </div>
@@ -65,11 +65,10 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                @foreach ($metaData as $meta)
-                                    @if($meta['list_show'])
-                                        <th>{{$meta['show_name']}}</th>
-                                    @endif
-                                @endforeach
+                                <th>配置项</th>
+                                <th>配置别名</th>
+                                <th>配置内容</th>
+                                <th>自动加载</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -77,19 +76,24 @@
                             @foreach ($records as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
-                                    @foreach ($metaData as $meta)
-                                        @if($meta['list_show'])
-                                            <td>{{ $record->{$meta['name']} }}</td>
-                                        @endif
-                                    @endforeach
+                                    <td>{{ $record->name }}</td>
+                                    <td>{{ $record->alias_name }}</td>
+                                    <td>{{ $record->value }}</td>
                                     <td>
-                                        <a title="详情" href="{{ route($moduleConf['moduleRoutePre'].'.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
-                                            <i class="la la-file-text"></i>
+                                        @if ($record->autoload == 1)
+                                            YES
+                                        @else
+                                            NO
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a title="Show details" href="{{ route('option.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                            <i class="la la-search"></i>
                                         </a>
-                                        <a title="编辑" href="{{ route($moduleConf['moduleRoutePre'].'.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                        <a title="Edit details" href="{{ route('option.edit',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
                                             <i class="la la-edit"></i>
                                         </a>
-                                        <form action="{{ route($moduleConf['moduleRoutePre'].'.destroy',$record->id) }}" method="POST" style="display:inline">
+                                        <form action="{{ route('option.destroy',$record->id) }}" method="POST" style="display:inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-clean btn-icon btn-icon-md">
@@ -101,18 +105,6 @@
                             @endforeach
                             </tbody>
                         </table>
-
-                    </div>
-                    <div class="row">
-
-                        <div class="col-sm-12 col-md-7">
-
-                        </div>
-                        <div class="col-sm-12 col-md-5">
-                            <div>
-                                {{ $records->links() }}
-                            </div>
-                        </div>
                     </div>
                 </div>
 
