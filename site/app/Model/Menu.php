@@ -11,7 +11,7 @@ class Menu extends Model
     public static function initOneLevelShow($records = [], $p_id = 0,$level = 0)
     {
         if(empty($records)) {
-            $records = self::all();
+            $records = self::orderBy('order', 'asc')->get();
         }
         $backData = [];
         foreach ($records as $record) {
@@ -27,8 +27,9 @@ class Menu extends Model
 
     public static function initTree($records = [], $p_id = 0, $level = 0)
     {
+
         if(empty($records)) {
-            $records = self::all();
+            $records = self::orderBy('order', 'asc')->get();
         }
         $backData = [];
         foreach ($records as $record) {
