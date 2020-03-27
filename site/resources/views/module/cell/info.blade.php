@@ -1,97 +1,97 @@
-@extends('layouts.admin')
+@extends('layouts.app')
+@section('page_style')
+    <!--begin::Page Vendors Styles(used by this page) -->
+    <!--end::Page Vendors Styles -->
+@endsection
 
+@section('subheader')
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    分类详情 </h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">详情页 </a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">详情</a>
+
+                    <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+                </div>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <a href="{{ route('category.create') }}" class="btn kt-subheader__btn-primary">
+                        分类详情 &nbsp;
+                        <!--<i class="flaticon2-calendar-1"></i>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+<!-- begin:: Content -->
 @section('content')
-<!-- BEGIN PAGE HEADER-->
-<!-- BEGIN PAGE BAR -->
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <a href="{{url('admin')}}">后台管理</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="{{url('admin/instance')}}">实例列表</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <span>项目内容</span>
-        </li>
-    </ul>
-</div>
-<!-- END PAGE BAR -->
-<!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> 【{{$instance->name}}】 的内容
-    <small>所属榜单：{{$instance->item_name}}-期：{{$instance->period}}</small>
-</h1>
-<!-- END PAGE TITLE-->
-<!-- END PAGE HEADER-->
-@if (count($errors) > 0)
-    @foreach ($errors->all() as $error)
-        <div class="note note-danger">
-            <p> {{ $error }} </p>
-        </div>
-    @endforeach
-@endif
-<div class="row">
-	<form action="{{ url('admin/cell') }}" method="POST" class="form-horizontal" id="cell_form" enctype="multipart/form-data" >
-    {!! csrf_field() !!}
-	<div class="col-md-12">
-		<div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-cogs"></i>数据标题
-                </div>
-                <div class="actions">
-                    <a href="javascript:;" class="btn btn-default btn-sm">
-                        <i class="fa fa-plus"></i> Add </a>
-                    <a href="javascript:;" class="btn btn-default btn-sm">
-                        <i class="fa fa-print"></i> Print </a>
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <form method="POST" action="{{ route('cell.store') }}" class="kt-form kt-form--label-right">
+        @csrf
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        {{ $instance->name }}
+                    </h3>
                 </div>
             </div>
-            <div class="portlet-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th> # </th>
-                                @foreach ($units_x as $x)
-                                <th>{{$x->name}}</th>
+            <div class="kt-portlet__body">
+                <!--begin::Section-->
+                <div class="kt-section">
+                    <div class="kt-section__content">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    @foreach ($metas_x as $x)
+                                    <th>{{$x->name}}</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($metas_y as $y)
+                                <tr>
+                                    <th scope="row">{{$y->name}}</th>
+                                    @foreach($metas_x as $x)
+                                        <td>
+                                            <input type="text" name="cell[{{$x->id}}][{{$y->id}}]" class="form-control" placeholder="" value="{{ isset($cells[$x->id][$y->id])?$cells[$x->id][$y->id]:''}}">
+                                        </td>
+                                    @endforeach
+                                </tr>
                                 @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($units_y as $y)
-                            <tr>
-                            	<td>{{$y->name}}</td>
-                            	@foreach($units_x as $x)
-                            	@if($x->content_type ==1)
-                            	<td><input type="text" name="cell[{{$x->id}}][{{$y->id}}]" class="form-control" placeholder="" value="{{$cells[$x->id][$y->id] or ''}}"></td>
-                            	@elseif($x->content_type == 2)
-                            	<td>
-                            		<input type="file" name="cell[{{$x->id}}][{{$y->id}}]" >
-                            		<input type="hidden" name="cover[{{$x->id}}][{{$y->id}}]" value="{{$cells[$x->id][$y->id] or ''}}">
-                            		<img src="{{ asset('storage/')}}/{{$cells[$x->id][$y->id] or ''}}" style="width:50px;height:50px;" /> 
-                            	</td>
-                            	@else
-                            	<td><input type="text" name="cell[{{$x->id}}][{{$y->id}}]" class="form-control" placeholder="" value="{{$cells[$x->id][$y->id] or ''}}"></td>
-                            	@endif
-                            	@endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                <div class="kt-section">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <input type="hidden" name="instance_id" value="{{$instance->id}}" />
+                            <button type="submit" class="btn btn-success center">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Section-->
             </div>
+
+            <!--end::Form-->
         </div>
-        <input type="hidden" name="instance_id" value="{{$instance->id}}" />
-        <div class="form-actions center">
-        	<div class="row">
-        		<div class="col-md-offset-3 col-md-9">
-                    <button type="submit" class="btn blue">提交</button>
-        		</div>
-        	</div>
-        </div>
-	</div>
-	</form>
-</div>
+
+        </form>
+    </div>
+@endsection
+<!-- end:: Content -->
+@section('page_js')
 @endsection

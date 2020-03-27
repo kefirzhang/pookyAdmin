@@ -42,10 +42,9 @@ class CellController extends Controller
                     }
                     $data[] = array(
                         'instance_id'=>$request->instance_id,
-                        'unit_x_id'=>$x,
-                        'unit_y_id'=>$y,
+                        'meta_x_id'=>$x,
+                        'meta_y_id'=>$y,
                         'content'=>$content,
-                        'user_id'=>$request->user()->id,
                         'created_at'=>date("Y-m-d H:i:s",time()),
                         'updated_at'=>date("Y-m-d H:i:s",time()),
                     );
@@ -58,10 +57,9 @@ class CellController extends Controller
                     if(!isset($request->cell[$x][$y])){
                         $data[] = array(
                             'instance_id'=>$request->instance_id,
-                            'unit_x_id'=>$x,
-                            'unit_y_id'=>$y,
+                            'meta_x_id'=>$x,
+                            'meta_y_id'=>$y,
                             'content'=>$request->cover[$x][$y],
-                            'user_id'=>$request->user()->id,
                             'created_at'=>date("Y-m-d H:i:s",time()),
                             'updated_at'=>date("Y-m-d H:i:s",time()),
                         );
