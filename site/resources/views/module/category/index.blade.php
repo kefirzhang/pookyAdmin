@@ -13,7 +13,7 @@
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="javascript:void(0);" class="kt-subheader__breadcrumbs-link">列表 </a>
+                    <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="javascript:void(0);" class="kt-subheader__breadcrumbs-link">分类列表 </a>
 
@@ -105,6 +105,10 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="kt-pagination  kt-pagination--info">
+                        {!! $records->appends(['parent_id' => $parent_id ])->links() !!}
+                    </div>
+
                 </div>
 
                 <!--end::Section-->
