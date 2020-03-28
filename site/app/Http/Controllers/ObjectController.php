@@ -13,7 +13,7 @@ class ObjectController extends Controller
 {
     public function index(Request $request)
     {
-        $records = Objects::orderBy('id', 'desc')->paginate(20);
+        $records = Objects::orderBy('order', 'asc')->paginate(env('LIST_PAGE_SIZE'));
         return view('module.object.index', ['records' => $records]);
 
     }
@@ -40,19 +40,16 @@ class ObjectController extends Controller
         $object->alias_name = $request->alias_name;
         $object->description = $request->description;
         $object->type = $request->type;
-        $object->cover = $request->cover;
         $object->order = $request->order;
         $object->options = json_encode($request->options);
 
-        /*
         if (!$request->hasFile('cover')) {
-            $object->cover = 'default.jpg';
+            $object->cover = 'default.png';
         } elseif ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            $object->cover = $request->cover->store(date("Y") . '/' . date("m"));
+            $object->cover = $request->cover->store('uploads/' . date("Ym"));
         } else {
             return redirect()->back()->withInput()->withErrors('图片有误！');
         }
-        */
 
         if ($object->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
@@ -90,15 +87,16 @@ class ObjectController extends Controller
         $object->alias_name = $request->alias_name;
         $object->description = $request->description;
         $object->type = $request->type;
-        $object->cover = $request->cover;
         $object->order = $request->order;
         $object->options = json_encode($request->options);
-        /*
+
         if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            Storage::delete($object->cover);
-            $object->cover = $request->cover->store(date("Y") . '/' . date("m"));
+            if ($object->cover != 'default.png') {
+                Storage::delete($object->cover);
+            }
+            $object->cover = $request->cover->store('uploads/' . date("Ym"));
         }
-        */
+
         if ($object->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
         } else {

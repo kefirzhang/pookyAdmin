@@ -82,7 +82,7 @@
                                     <td>{{ $record->name }}</td>
                                     <td>{{ $record->alias_name }}</td>
                                     <td>{{ $record->type }}</td>
-                                    <td>{{ $record->cover }}</td>
+                                    <td><img src="{{ asset('storage/'.$record->cover) }}" style="width:50px;height:50px;" /></td>
                                     <td>{{ $record->order }}</td>
                                     <td>
                                         <a title="Show meta" href="{{ route('meta.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">
