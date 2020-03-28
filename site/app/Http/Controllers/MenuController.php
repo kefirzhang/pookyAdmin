@@ -41,7 +41,7 @@ class MenuController extends Controller
 
     public function index()
     {
-        $records = Menu::all()->sortBy('order')->paginate(env('LIST_PAGE_SIZE'));
+        $records = Menu::orderBy('order','asc')->paginate(env('LIST_PAGE_SIZE'));
         return view('module.menu.index', ['records' => $records]);
     }
 

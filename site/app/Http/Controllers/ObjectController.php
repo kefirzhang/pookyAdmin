@@ -13,8 +13,13 @@ class ObjectController extends Controller
 {
     public function index(Request $request)
     {
-        $records = Objects::orderBy('order', 'asc')->paginate(env('LIST_PAGE_SIZE'));
-        return view('module.object.index', ['records' => $records]);
+        $category_id = isset($request->category_id) ? $request->category_id : 0;
+        if($category_id) {
+            $records = Objects::where('category_id', $category_id)->orderBy('order', 'asc')->paginate(env('LIST_PAGE_SIZE'));
+        } else {
+            $records = Objects::orderBy('order', 'asc')->paginate(env('LIST_PAGE_SIZE'));
+        }
+        return view('module.object.index', ['records' => $records,'category_id'=>$category_id]);
 
     }
 

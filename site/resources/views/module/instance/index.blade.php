@@ -104,7 +104,7 @@
                         </table>
                     </div>
                     <div class="kt-pagination  kt-pagination--info">
-                        {!! $records->appends(['parent_id' => $parent_id ])->links() !!}
+                        {!! $records->appends(['object_id' => $object_id ])->links() !!}
                     </div>
                 </div>
 

@@ -46,7 +46,7 @@
             </div>
 
             <!--begin::Form-->
-            <form method="POST" action="{{ route('instance.store') }}" class="kt-form kt-form--label-right">
+            <form method="POST" action="{{ route('instance.store') }}" class="kt-form kt-form--label-right" enctype="multipart/form-data">
                 @csrf
                 <div class="kt-portlet__body" id="main_form">
                     @if (count($errors) > 0)

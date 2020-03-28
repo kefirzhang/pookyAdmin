@@ -36,7 +36,7 @@
 <!-- begin:: Content -->
 @section('content')
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-        <form method="POST" action="{{ route('cell.store') }}" class="kt-form kt-form--label-right">
+        <form method="POST" action="{{ route('cell.store') }}" class="kt-form kt-form--label-right" enctype="multipart/form-data">
         @csrf
         <div class="kt-portlet">
             <div class="kt-portlet__head">

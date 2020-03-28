@@ -13,8 +13,13 @@ class InstanceController extends Controller
 {
     public function index(Request $request)
     {
-        $records = Instance::orderBy('id', 'desc')->paginate(env('LIST_PAGE_SIZE'));
-        return view('module.instance.index', ['records' => $records]);
+        $object_id = isset($request->object_id) ? $request->object_id : 0;
+        if ($object_id) {
+            $records = Instance::where('object_id', $object_id)->orderBy('id', 'desc')->paginate(env('LIST_PAGE_SIZE'));
+        } else {
+            $records = Instance::orderBy('id', 'desc')->paginate(env('LIST_PAGE_SIZE'));
+        }
+        return view('module.instance.index', ['records' => $records, 'object_id' => $object_id]);
 
     }
 

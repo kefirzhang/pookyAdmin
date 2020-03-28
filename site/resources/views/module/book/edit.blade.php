@@ -46,7 +46,7 @@
             </div>
 
             <!--begin::Form-->
-            <form method="POST" action="{{ route('book.update',$record->id) }}" class="kt-form kt-form--label-right">
+            <form method="POST" action="{{ route('book.update',$record->id) }}" class="kt-form kt-form--label-right" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="kt-portlet__body">
