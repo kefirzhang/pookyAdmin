@@ -73,20 +73,6 @@ class MenuController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        $category = Category::find($id);
-        if ($category->parent_id != 0) {
-            $parent_info = Category::find($category->parent_id);
-            $category->parent_name = $parent_info->name;
-        } else {
-            $category->parent_name = '顶级分类';
-        }
-        return view('admin/category/info', ['category' => $category]);
-
-        return view('module.menu.show');
-    }
-
     public function destroy($id)
     {
         Menu::find($id)->delete();

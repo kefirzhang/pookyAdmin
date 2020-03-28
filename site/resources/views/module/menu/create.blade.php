@@ -9,7 +9,7 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    Empty Page </h3>
+                    菜单新增 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
@@ -24,7 +24,7 @@
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
                     <a href="{{ route('menu.create') }}" class="btn kt-subheader__btn-primary">
-                        新增菜单 &nbsp;
+                        新增新增 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>
@@ -40,7 +40,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Textual HTML5 Inputs
+                        菜单新增
                     </h3>
                 </div>
             </div>
