@@ -69,7 +69,7 @@
                         <label for="example-text-input" class="col-2 col-form-label">父类</label>
                         <div class="col-10">
                             <select class="form-control" name="parent_id">
-                                <option value="0">--</option>
+                                <option value="0">顶级分类</option>
                                 @foreach ($topCategoryList as $category)
                                     @if ($record->parent_id == $category->id )
                                         <option selected value="{{$category->id}}">{{$category->name}}</option>

@@ -38,4 +38,5 @@ class Category extends Model
     {
         return $this->hasMany('App\Model\Objects', 'category_id');
     }
+
 }

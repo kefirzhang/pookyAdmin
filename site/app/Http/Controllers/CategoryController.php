@@ -14,14 +14,19 @@ class CategoryController extends Controller
     {
 
         $parent_id = isset($request->parent_id) ? $request->parent_id : 0;
-        $records = Category::where('parent_id', $parent_id)->orderBy('id', 'desc')->paginate(20);
+        $records = Category::where('parent_id', $parent_id)->orderBy('order', 'asc')->paginate(env('LIST_PAGE_SIZE'));
+        $categoryTree = Category::categoryTree(true);
 
         //获取所有的父类
-        foreach ($records as $record){
-
+        foreach ($records as &$record){
+            if($record->parent_id == '0') {
+                $record->parent_name = '顶级分类';
+            } elseif(isset($categoryTree[$record->id])) {
+                $record->parent_name = $categoryTree[$record->id]['name'];
+            } else {
+                $record->parent_name = '';
+            }
         }
-
-
         return view('module.category.index', ['records' => $records, 'parent_id' => $parent_id]);
 
     }
@@ -45,7 +50,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->alias_name = $request->alias_name;
         $category->description = $request->description;
-        $category->cover = $request->cover;
+        $category->cover = $request->cover?:'';
         $category->order = $request->order;
         $category->options = json_encode($request->options);
 

@@ -77,7 +77,7 @@
                             @foreach ($records as $record)
                                 <tr>
                                     <th scope="row">{{ $record->id }}</th>
-                                    <td>{{ $record->parent_id }}</td>
+                                    <td>{{ $record->parent_name }}</td>
                                     <td>{{ $record->name }}</td>
                                     <td>{{ $record->alias_name }}</td>
                                     <td>{{ $record->cover }}</td>
