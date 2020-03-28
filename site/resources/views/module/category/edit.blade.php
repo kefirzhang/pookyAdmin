@@ -16,7 +16,7 @@
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="" class="kt-subheader__breadcrumbs-link">编辑</a>
+                    <a href="javascript:void(0);" class="kt-subheader__breadcrumbs-link">编辑</a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
@@ -24,7 +24,7 @@
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
                     <a href="{{ route('category.create') }}" class="btn kt-subheader__btn-primary">
-                        编辑分类 &nbsp;
+                        新增分类 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>

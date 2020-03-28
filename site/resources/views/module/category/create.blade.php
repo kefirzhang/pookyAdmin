@@ -16,7 +16,7 @@
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">列表页 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="" class="kt-subheader__breadcrumbs-link">新增</a>
+                    <a href="javascript:void(0);" class="kt-subheader__breadcrumbs-link">新增</a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
@@ -40,7 +40,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        新建分类
+                        新增分类
                     </h3>
                 </div>
             </div>

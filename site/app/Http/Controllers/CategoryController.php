@@ -15,6 +15,13 @@ class CategoryController extends Controller
 
         $parent_id = isset($request->parent_id) ? $request->parent_id : 0;
         $records = Category::where('parent_id', $parent_id)->orderBy('id', 'desc')->paginate(20);
+
+        //获取所有的父类
+        foreach ($records as $record){
+
+        }
+
+
         return view('module.category.index', ['records' => $records, 'parent_id' => $parent_id]);
 
     }
