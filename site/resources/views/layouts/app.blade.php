@@ -58,7 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
     <div class="kt-header-mobile__logo">
         <a href="demo1/index.html">
-            <img alt="Logo" src="./assets/media/logos/logo-light.png" />
+            <img alt="Logo" src="/media/logos/logo-light.png" />
         </a>
     </div>
     <div class="kt-header-mobile__toolbar">
@@ -80,7 +80,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
                 <div class="kt-aside__brand-logo">
                     <a href="demo1/index.html">
-                        <img alt="Logo" src="./assets/media/logos/logo-light.png" />
+                        <img alt="Logo" src="/media/logos/logo-light.png" />
                     </a>
                 </div>
                 <div class="kt-aside__brand-tools">
@@ -1189,12 +1189,12 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="kt-footer  kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
                 <div class="kt-container  kt-container--fluid ">
                     <div class="kt-footer__copyright">
-                        2019&nbsp;&copy;&nbsp;<a href="http://keenthemes.com/metronic" target="_blank" class="kt-link">Keenthemes</a>
+                        2020&nbsp;&copy;&nbsp;<a href="{{ env('APP_URL') }}" target="_blank" class="kt-link">竹芒科技</a>
                     </div>
                     <div class="kt-footer__menu">
-                        <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">About</a>
-                        <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Team</a>
-                        <a href="http://keenthemes.com/metronic" target="_blank" class="kt-footer__menu-link kt-link">Contact</a>
+                        <a href="{{ env('APP_URL') }}" target="_blank" class="kt-footer__menu-link kt-link">About</a>
+                        <a href="{{ env('APP_URL') }}" target="_blank" class="kt-footer__menu-link kt-link">Team</a>
+                        <a href="{{ env('APP_URL') }}" target="_blank" class="kt-footer__menu-link kt-link">Contact</a>
                     </div>
                 </div>
             </div>
