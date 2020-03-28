@@ -16,7 +16,7 @@
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="{{ route('book.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="javascript:;" class="kt-subheader__breadcrumbs-link">新建 </a>
+                    <a href="javascript:void(0);" class="kt-subheader__breadcrumbs-link">新建 </a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
@@ -40,7 +40,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Textual HTML5 Inputs
+                        图书新增
                     </h3>
                 </div>
             </div>

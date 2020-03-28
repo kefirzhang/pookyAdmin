@@ -9,12 +9,12 @@
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    分类详情 </h3>
+                    实例数据 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
                     <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route('category.index') }}" class="kt-subheader__breadcrumbs-link">详情页 </a>
+                    <a href="{{ route('instance.index') }}" class="kt-subheader__breadcrumbs-link">详情页 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="" class="kt-subheader__breadcrumbs-link">详情</a>
 
@@ -23,8 +23,8 @@
             </div>
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
-                    <a href="{{ route('category.create') }}" class="btn kt-subheader__btn-primary">
-                        分类详情 &nbsp;
+                    <a href="{{ route('instance.index') }}" class="btn kt-subheader__btn-primary">
+                        实例数据 &nbsp;
                         <!--<i class="flaticon2-calendar-1"></i>-->
                     </a>
                 </div>

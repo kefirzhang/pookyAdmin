@@ -16,7 +16,7 @@
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="{{ route('book.index') }}" class="kt-subheader__breadcrumbs-link">列表 </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="javascript:;" class="kt-subheader__breadcrumbs-link">详情</a>
+                    <a href="javascript:void(0);" class="kt-subheader__breadcrumbs-link">详情</a>
 
                     <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
                 </div>
