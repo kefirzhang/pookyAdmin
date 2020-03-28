@@ -78,7 +78,7 @@
                                     <th scope="row">{{ $record->id }}</th>
                                     <td>{{ $record->object_id }}</td>
                                     <td>{{ $record->name }}</td>
-                                    <td>{{ $record->cover }}</td>
+                                    <td><img src="{{ asset('storage/'.$record->cover) }}" style="width:50px;height:50px;" /></td>
                                     <td>{{ $record->order }}</td>
                                     <td>
                                         <a title="Show sons" href="{{ route('cell.show',$record->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">

@@ -90,7 +90,7 @@
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">封面</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" name="cover">
+                            <input class="form-control" type="file" value="" name="cover">
                         </div>
                     </div>
                     <div class="form-group row">

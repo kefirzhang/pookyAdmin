@@ -36,19 +36,16 @@ class InstanceController extends Controller
         $instance->object_id = $request->object_id;
         $instance->name = $request->name;
         $instance->description = $request->description;
-        $instance->cover = $request->cover;
         $instance->order = $request->order;
         $instance->options = json_encode($request->options);
 
-        /*
         if (!$request->hasFile('cover')) {
-            $instance->cover = 'default.jpg';
+            $instance->cover = 'default.png';
         } elseif ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            $instance->cover = $request->cover->store(date("Y") . '/' . date("m"));
+            $instance->cover = $request->cover->store('uploads/' . date("Ym"));
         } else {
             return redirect()->back()->withInput()->withErrors('图片有误！');
         }
-        */
 
         if ($instance->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
@@ -86,12 +83,14 @@ class InstanceController extends Controller
         $instance->cover = $request->cover;
         $instance->order = $request->order;
         $instance->options = json_encode($request->options);
-        /*
+
         if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            Storage::delete($instance->cover);
-            $instance->cover = $request->cover->store(date("Y") . '/' . date("m"));
+            if ($instance->cover != 'default.png') {
+                Storage::delete($instance->cover);
+            }
+            $instance->cover = $request->cover->store('uploads/' . date("Ym"));
         }
-        */
+
         if ($instance->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
         } else {
