@@ -40,7 +40,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Textual HTML5 Inputs
+                        图书详情
                     </h3>
                 </div>
             </div>
