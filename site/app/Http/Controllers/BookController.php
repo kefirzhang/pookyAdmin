@@ -45,7 +45,7 @@ class BookController extends Controller
 
     public function index()
     {
-        $records = Book::all();
+        $records = Book::paginate(env('LIST_PAGE_SIZE'));
         return view('module.book.index', ['records' => $records]);
     }
 

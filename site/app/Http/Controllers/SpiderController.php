@@ -62,7 +62,7 @@ class SpiderController extends Controller
     {
         $b_id = $request->input('b_id', 0);
         if ($b_id) {
-            $records = Spider::where('b_id', $b_id)->paginate(200);
+            $records = Spider::where('b_id', $b_id)->paginate(env('LIST_PAGE_SIZE'));
         } else {
             $records = Spider::all();
         }

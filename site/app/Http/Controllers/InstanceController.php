@@ -13,7 +13,7 @@ class InstanceController extends Controller
 {
     public function index(Request $request)
     {
-        $records = Instance::orderBy('id', 'desc')->paginate(20);
+        $records = Instance::orderBy('id', 'desc')->paginate(env('LIST_PAGE_SIZE'));
         return view('module.instance.index', ['records' => $records]);
 
     }

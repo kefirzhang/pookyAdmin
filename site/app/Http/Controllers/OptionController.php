@@ -12,7 +12,7 @@ class OptionController extends Controller
 {
     public function index(Request $request)
     {
-        $records = Option::orderBy('id', 'desc')->paginate(20);
+        $records = Option::orderBy('id', 'desc')->paginate(env('LIST_PAGE_SIZE'));
         return view('module.option.index', ['records' => $records]);
 
     }
