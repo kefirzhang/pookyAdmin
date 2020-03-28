@@ -52,7 +52,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Bordered Table
+                        日志列表
                     </h3>
                 </div>
             </div>
