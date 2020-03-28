@@ -80,7 +80,7 @@
                                     <td>{{ $record->parent_name }}</td>
                                     <td>{{ $record->name }}</td>
                                     <td>{{ $record->alias_name }}</td>
-                                    <td>{{ $record->cover }}</td>
+                                    <td><img src="{{ asset('storage/'.$record->cover) }}" style="width:50px;height:50px;" /></td>
                                     <td>{{ $record->order }}</td>
                                     <td>
                                         <a title="Show sons" href="{{ route('category.index') }}?parent_id={{ $record->id }}" class="btn btn-sm btn-clean btn-icon btn-icon-md">

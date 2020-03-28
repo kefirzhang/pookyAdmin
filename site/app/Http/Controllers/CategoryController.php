@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Category;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Storage;
 
 
 class CategoryController extends Controller
@@ -17,10 +18,10 @@ class CategoryController extends Controller
         $categoryTree = Category::categoryTree(true);
 
         //获取所有的父类
-        foreach ($records as &$record){
-            if($record->parent_id == '0') {
+        foreach ($records as &$record) {
+            if ($record->parent_id == '0') {
                 $record->parent_name = '顶级分类';
-            } elseif(isset($categoryTree[$record->id])) {
+            } elseif (isset($categoryTree[$record->id])) {
                 $record->parent_name = $categoryTree[$record->id]['name'];
             } else {
                 $record->parent_name = '';
@@ -53,12 +54,13 @@ class CategoryController extends Controller
         $category->options = json_encode($request->options);
 
         if (!$request->hasFile('cover')) {
-            $category->cover = 'default.jpg';
+            $category->cover = 'default.png';
         } elseif ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            $category->cover = $request->cover->store('cover/'.date("Y") . '/' . date("m"));
+            $category->cover = $request->cover->store('uploads/' . date("Ym"));
         } else {
             return redirect()->back()->withInput()->withErrors('图片有误！');
         }
+
         if ($category->save()) {
             return redirect()->back()->withInput()->withErrors('保存成功！');
         } else {
@@ -93,15 +95,14 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->alias_name = $request->alias_name;
         $category->description = $request->description;
-
         $category->order = $request->order;
         $category->options = json_encode($request->options);
 
         if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
-            if($category->cover != 'default.jpg'){
+            if ($category->cover != 'default.png') {
                 Storage::delete($category->cover);
             }
-            $category->cover = $request->cover->store(date("Y") . '/' . date("m"));
+            $category->cover = $request->cover->store('uploads/' . date("Ym"));
         }
 
         if ($category->save()) {
